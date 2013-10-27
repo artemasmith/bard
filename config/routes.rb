@@ -1,4 +1,12 @@
 Bard::Application.routes.draw do
+  get "barcodes/index"
+  get "barcodes/new"
+  get "barcodes/create"
+  get "barcodes/update"
+  get "barcodes/destroy"
+  get "barcodes/edit"
+  devise_for :users
+#  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -53,4 +61,5 @@ Bard::Application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+#  root: barcodes_path
 end

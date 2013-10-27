@@ -7,6 +7,11 @@ gem 'rails', '4.0.0'
 #gem 'sqlite3'
 
 gem 'mysql2'
+gem 'devise'
+gem 'therubyracer'
+#gem 'less-rails'
+gem 'twitter-bootstrap-rails'
+gem 'haml-rails'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
