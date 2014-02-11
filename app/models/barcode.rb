@@ -15,7 +15,22 @@ class Barcode < ActiveRecord::Base
   belongs_to :ware
   has_many :client_code
 
+  #return xml
   def xml_response
-  	
+  	xml = {}
+  	#GROUPS
+  	groups = {}
+  	if self.ware.parent
+  	  parentware = self.ware.parent
+  	  i=0
+  	  while parentware 
+  	  	groups["group#{i}"] = { id_ext: parentware[:id_ext], title: parentware[:title], id_parent: parentware[:id_parent] }
+  	  	parentware = parentware.parent
+  	  	i++
+  	  end
+	end
+	xml[:group] = groups
+
+	xml.to_xml
   end
 end

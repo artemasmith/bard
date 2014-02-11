@@ -16,15 +16,22 @@
 require 'spec_helper'
 
 describe Ware do
-    describe "check methods and vars" do
-	it {should respod_to :title}
-	it {should respod_to :id_parent}
-	it {should respod_to :specs}
-	it {should respod_to :id_cat}
-	it {should respod_to :type}
-	it {should respod_to :id_ext}
-	#methods
-	it {should respod_to :get_ware}
-	it {should respod_to :add_ware}
+
+    context 'creation' do
+      let (:ware){ Ware.new(title: 'test', specs: 'test') }
+      it { expect { ware.save }.to change { Ware.count }.by(1) }
+    end
+
+    context 'children check' do
+      let(:parent){ Ware.create(title: 'parent', specs: 'parent ware') }
+      let(:child1){ Ware.create(title: 'child1', specs: 'child ware') }
+      let(:child2){ Ware.create(title: 'child2', specs: 'child ware') }
+      before (:all) do
+      	parent.children << child1
+      end
+      it { parent.children.count.should eq 1 } 
+      it { expect { parent.children << child2 }.to change { parent.children.count }.by(1) }
+      it { parent.children[0].should eq child1}
+      it { child1.parent.should eq parent }
     end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131027062137) do
+ActiveRecord::Schema.define(version: 20140211115625) do
 
   create_table "barcodes", force: true do |t|
     t.string   "number"
@@ -58,6 +58,11 @@ ActiveRecord::Schema.define(version: 20131027062137) do
     t.boolean  "blocked"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "groups_wares", force: true do |t|
+    t.integer "id_parent"
+    t.integer "ware_id"
   end
 
   create_table "operation_logs", force: true do |t|

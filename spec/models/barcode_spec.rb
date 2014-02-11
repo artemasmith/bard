@@ -30,5 +30,17 @@ describe Barcode do
         it { expect{ wrong_barcode2.save }.not_to change{ Barcode.count } }
       end
     end
+
+   
+    context 'to_xml' do
+      let(:barcode) { Barcode.create(number: '254321223', id_ware: 1) }
+      it { barcode.xml_response.should match(/groups/) }
+      it { barcode.xml_response.should match(/categories/) }
+      it { barcode.xml_response.should match(/properties/) }
+      it { barcode.xml_response.should match(/cat_property/) }
+      it { barcode.xml_response.should match(/values/) }
+      it { barcode.xml_response.should match(/wares/) }
+      it { barcode.xml_response.should match(/characteristics/) }
+    end
   end
 end
