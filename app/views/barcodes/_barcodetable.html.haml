@@ -1,0 +1,17 @@
+%table.table.table-bordered
+  %th= t :id
+  %th= t :id_ware
+  %th= t :barcode_number
+  %th= t :created_at
+  %td
+  -@barcodes.each do |b|
+    %tbody
+      %td= b.id
+      %td= b.id_ware
+      %td= b.number
+      %td= b.created_at
+      %td
+        %button{"onclick"=>"getBarcode(#{b.id})"} Show
+/=will_paginate @barcodes
+%script
+  =render 'barcodetable.js'

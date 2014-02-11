@@ -1,0 +1,13 @@
+function getBarcode(id){
+  temp = $.ajax({ type: 'GET', dataType: 'xml', url: '/barcodes/' + id, cache: false,
+			success: function (xml) {
+			  console.log(xml);
+        alert($(xml).find('created-at').text());
+        //alert('<%= params%>');
+      },
+      error: function (xhr, ajaxOptions, thrownError) {
+       	alert(xhr.status);
+        alert(thrownError);
+      }
+  })
+}

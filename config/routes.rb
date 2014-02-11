@@ -1,4 +1,5 @@
 Bard::Application.routes.draw do
+  resources :barcodes
   get "barcodes/index"
   get "barcodes/new"
   get "barcodes/create"

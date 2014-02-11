@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: barcodes
+#
+#  id         :integer          not null, primary key
+#  number     :string(255)
+#  id_ware    :integer
+#  created_at :datetime
+#  updated_at :datetime
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

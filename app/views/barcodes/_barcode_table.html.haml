@@ -1,0 +1,16 @@
+%table.table.table-bordered
+  %th= t :id
+  %th= t :id_ware
+  %th= t :barcode_number
+  %th= t :created_at
+  %td
+  %tbody{"data-bind"=>"foreach: barcodes"}
+    %td{"data-bind"=>"text: id"}
+    %td{"data-bind"=>"text: id_ware"}
+    %td{"data-bind"=>"text: number"}
+    %td{"data-bind"=>"text: created_at"}
+    %td
+      %button{"data-bind"=>"click: $parent.showBarcode"} Show
+/=will_paginate @barcodes
+%script
+  =render 'barcode_table.js'

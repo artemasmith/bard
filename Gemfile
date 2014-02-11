@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.0.0'
+gem 'rails', '~> 4.0.0'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
@@ -9,10 +9,12 @@ gem 'rails', '4.0.0'
 gem 'mysql2'
 gem 'devise'
 gem 'therubyracer'
-#gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
+#gem 'knockoutjs-rails'
+gem 'will_paginate'
 
+gem 'annotate'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
@@ -27,6 +29,9 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
+#gem 'jquery-ui-rails'
+#gem 'jquery-ui-themes'
+#gem 'jquery-fileupload-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
