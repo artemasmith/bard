@@ -22,12 +22,5 @@
 #  last_sign_in_ip        :string(255)
 #
 
-class Client < ActiveRecord::Base
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
-  has_many :unvalidated_ware
-  has_many :client_code
-  has_many :shops, class_name: 'ClientShop', foreign_key: :client_id
-end
+#FactoryGirl.define do#  factory :client do#    title 'test'#    login 'login'#    pass 'pass'#  end
+#end

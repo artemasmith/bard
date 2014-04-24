@@ -6,13 +6,14 @@ gem 'rails', '~> 4.0.0'
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
 
-gem 'mysql2'
+gem 'pg'
 gem 'devise'
-gem 'therubyracer'
+#gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'haml-rails'
 #gem 'knockoutjs-rails'
 gem 'will_paginate'
+gem 'nokogiri'
 
 gem 'annotate'
 # Use SCSS for stylesheets
@@ -45,10 +46,11 @@ group :doc do
 end
 
 
-
+gem 'factory_girl_rails'
 group :development, :test do
     gem 'rspec-rails'
     gem 'capybara'
+	
 end
 
 # Use ActiveModel has_secure_password

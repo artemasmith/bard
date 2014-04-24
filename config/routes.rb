@@ -1,4 +1,7 @@
 Bard::Application.routes.draw do
+  devise_for :clients
+  get "client_auth/get_token"
+  get "client_auth/update_token"
   resources :barcodes
   get "barcodes/index"
   get "barcodes/new"
