@@ -14,5 +14,12 @@
 
 class ClientShop < ActiveRecord::Base
   belongs_to :client
+
+  before_create :generate_token
+
+  def generate_token
+    self.auth_token = Digest::MD5.hexdigest("#{self.client_id} - #{Time.now}")
+    self.token_expire = Date.today + 1.year
+  end
 end
  

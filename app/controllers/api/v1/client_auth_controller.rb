@@ -1,6 +1,6 @@
-class ClientAuthController < ApplicationController
-  def get_token    
-    client = Client.where(login: params[:login], pass: params[:pass])[0]
+class Api::V1::ClientAuthController < ApplicationController
+  def create
+    client = Client.where(login: params[:login], password: params[:password])[0]
     if client
       shop = client.shops.create(ip: request.remote_ip, out_id: params[:out_id], auth_token: Digest::MD5.hexdigest("#{ client.id }+#{ Time.now }"), token_expire: Time.now + 5.days)
       #@token = 
@@ -16,7 +16,7 @@ class ClientAuthController < ApplicationController
     end
   end
 
-  def update_token
+  def update
   end
   
 

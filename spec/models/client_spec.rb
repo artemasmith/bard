@@ -6,7 +6,7 @@
 #  title                  :string(255)
 #  specs                  :text
 #  login                  :string(255)
-#  pass                   :string(255)
+#  password               :string(255)
 #  blocked                :boolean
 #  created_at             :datetime
 #  updated_at             :datetime

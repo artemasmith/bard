@@ -12,7 +12,7 @@
 class Barcode < ActiveRecord::Base
   validates :number, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :id_ware, numericality: true, presence: true 
-  belongs_to :ware
+  belongs_to :ware, foreign_key: :id_ware
   has_many :client_code
 
   def xml_response

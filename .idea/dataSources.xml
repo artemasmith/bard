@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="2082390463">
+    <data-source source="LOCAL" name="Rails bard: development" uuid="501c1d6c-2f45-45ee-a79c-8fbc64f0f7e4">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:bardtest</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfe1dfcbdfc6dfc5dfd9dfc2dfcb</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails bard: test" uuid="8a2c947b-0813-4d90-8bf7-2d4c19b91d15">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:bardtest</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfe1dfcbdfc6dfc5dfd9dfc2dfcb</user-password>
+      <libraries />
+    </data-source>
+    <data-source source="LOCAL" name="Rails bard: production" uuid="28066389-cfa0-4bd4-b6c4-21164904f6e2">
+      <driver-ref>postgresql</driver-ref>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql:bard</jdbc-url>
+      <user-name>root</user-name>
+      <user-password>dfe1dfcbdfc6dfc5dfd9dfc2dfcb</user-password>
+      <libraries />
+    </data-source>
+  </component>
+</project>
+

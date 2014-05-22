@@ -12,5 +12,7 @@
 #
 
 class Characteristic < ActiveRecord::Base
-  belongs_to :ware
+  belongs_to :ware, foreign_key: :id_ware
+  has_one :property, foreign_key: :id_prop
+  has_one :value, foreign_key: :id_val
 end

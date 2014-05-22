@@ -6,7 +6,7 @@
 #  title                  :string(255)
 #  specs                  :text
 #  login                  :string(255)
-#  pass                   :string(255)
+#  password               :string(255)
 #  blocked                :boolean
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -28,6 +28,7 @@ class Client < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_many :unvalidated_ware
-  has_many :client_code
+  has_many :client_codes
   has_many :shops, class_name: 'ClientShop', foreign_key: :client_id
+  has_many :unvalidated_wares
 end

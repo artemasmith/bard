@@ -14,8 +14,6 @@ require 'spec_helper'
 
 describe Value do
     describe 'params and methods' do
-	it {should respond_to :id_property}
-	it {should respond_to :val}
-	it {should respond_to :id_ext}
+
     end
 end

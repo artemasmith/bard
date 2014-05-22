@@ -1,16 +1,22 @@
 Bard::Application.routes.draw do
   devise_for :clients
-  get "client_auth/get_token"
-  get "client_auth/update_token"
+  #get "client_auth/get_token"
+  #get "client_auth/update_token"
   resources :barcodes
-  get "barcodes/index"
-  get "barcodes/new"
-  get "barcodes/create"
-  get "barcodes/update"
-  get "barcodes/destroy"
-  get "barcodes/edit"
   devise_for :users
   root 'barcodes#index'
+
+  namespace :api, defaults: { format: :xml } do
+    scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
+      #TODO выкосить эту пародию на авторизацию
+      match '/auth' => 'client_auth#create', :via => :post, as: :create_session
+      match '/auth' => 'client_auth#update', :via => :put, as: :update_session
+
+      match '/barcode' => 'barcodes#show', via: :get, as: :show_barcode_api
+      match '/barcode' => 'barcodes#create', via: :post, as: :create_barcode_api
+      match '/barcodes' => 'barcodes#index', via: :get, as: :all_barcodes_api
+    end
+  end
 #  devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

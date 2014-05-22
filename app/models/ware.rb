@@ -14,6 +14,6 @@
 #
 
 class Ware < ActiveRecord::Base
-  has_many :characteristic
-  has_many :barcode
+  has_many :characteristics, foreign_key: :id_ware
+  has_many :barcodes
 end

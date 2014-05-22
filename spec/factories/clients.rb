@@ -6,7 +6,7 @@
 #  title                  :string(255)
 #  specs                  :text
 #  login                  :string(255)
-#  pass                   :string(255)
+#  password               :string(255)
 #  blocked                :boolean
 #  created_at             :datetime
 #  updated_at             :datetime
@@ -22,5 +22,11 @@
 #  last_sign_in_ip        :string(255)
 #
 
-#FactoryGirl.define do#  factory :client do#    title 'test'#    login 'login'#    pass 'pass'#  end
-#end
+FactoryGirl.define do
+  factory :client do
+    title 'test'
+    email 'test@test.ru'
+    login 'login'
+    password 'pass12345'
+  end
+end
