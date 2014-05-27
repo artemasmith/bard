@@ -15,6 +15,7 @@ gem 'haml-rails'
 gem 'will_paginate'
 gem 'nokogiri'
 
+
 gem 'annotate'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
@@ -48,9 +49,9 @@ end
 
 gem 'factory_girl_rails'
 group :development, :test do
-    gem 'rspec-rails'
-    gem 'capybara'
-	
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'database_cleaner'
 end
 
 # Use ActiveModel has_secure_password

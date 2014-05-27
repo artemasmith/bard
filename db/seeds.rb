@@ -31,36 +31,36 @@ end
 
 #VALUES
 [
-    { id_prop: 1, value: '30%' },
-    { id_prop: 1, value: '20%' },
-    { id_prop: 1, value: '40%' },
-    { id_prop: 2, value: 'белый' },
-    { id_prop: 2, value: 'черный' }
+    { property_id: 1, value: '30%' },
+    { property_id: 1, value: '20%' },
+    { property_id: 1, value: '40%' },
+    { property_id: 2, value: 'белый' },
+    { property_id: 2, value: 'черный' }
 ].each do |value|
   Value.create(value)
 end
 
 #WARES
 [
-    { title: 'Молоко', specs: 'Йоу Буренка, тру молоко', id_cat: 4 },
-    { title: 'Сметана', specs: 'Йоу Буренка, тру сметана', id_cat: 4 },
-    { title: 'Паста Рогаци', specs: 'Снупдог паста', id_cat: 1 },
-    { title: 'Рожки', specs: 'советюнионстайл', id_cat: 1 },
-    { title: 'Греча', specs: 'Богатая реча', id_cat: 2 },
-    { title: 'Рис', specs: 'Не смотри вниз', id_cat: 2 },
+    { title: 'Молоко', specs: 'Йоу Буренка, тру молоко', category_id: 4 },
+    { title: 'Сметана', specs: 'Йоу Буренка, тру сметана', category_id: 4 },
+    { title: 'Паста Рогаци', specs: 'Снупдог паста', category_id: 1 },
+    { title: 'Рожки', specs: 'советюнионстайл', category_id: 1 },
+    { title: 'Греча', specs: 'Богатая реча', category_id: 2 },
+    { title: 'Рис', specs: 'Не смотри вниз', category_id: 2 },
 ].each do |ware|
   Ware.create(ware)
 end
 
 #CHARACTERISTICS
 [
-    { id_prop: 1, id_ware: 1, id_val: 1},
-    { id_prop: 2, id_ware: 2, id_val: 5},
-    { id_prop: 2, id_ware: 2, id_val: 4},
-    { id_prop: 3, id_ware: 1, id_val: 3},
-    { id_prop: 1, id_ware: 3, id_val: 1},
-    { id_prop: 2, id_ware: 3, id_val: 2},
-    { id_prop: 3, id_ware: 3, id_val: 3}
+    { property_id: 1, ware_id: 1, value_id: 1},
+    { property_id: 2, ware_id: 2, value_id: 5},
+    { property_id: 2, ware_id: 2, value_id: 4},
+    { property_id: 3, ware_id: 1, value_id: 3},
+    { property_id: 1, ware_id: 3, value_id: 1},
+    { property_id: 2, ware_id: 3, value_id: 2},
+    { property_id: 3, ware_id: 3, value_id: 3}
 ].each do |char|
   Characteristic.create(char)
 end
@@ -68,12 +68,12 @@ end
 #BARCODES
 
 [
-    { number: '123312', id_ware: 1 },
-    { number: '231132', id_ware: 2 },
-    { number: '435434', id_ware: 3 },
-    { number: '34546098798', id_ware: 4 },
-    { number: '12309821308', id_ware: 5 },
-    { number: '23434234234', id_ware: 5 }
+    { number: '123312', ware_id: 1 },
+    { number: '231132', ware_id: 2 },
+    { number: '435434', ware_id: 3 },
+    { number: '34546098798', ware_id: 4 },
+    { number: '12309821308', ware_id: 5 },
+    { number: '23434234234', ware_id: 5 }
 ].each do |barcode|
   Barcode.create(barcode)
 end

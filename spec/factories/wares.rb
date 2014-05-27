@@ -13,8 +13,11 @@
 #  updated_at  :datetime
 #
 
-class Ware < ActiveRecord::Base
-  has_many :characteristics
-  belongs_to :category
-  has_many :barcodes
+FactoryGirl.define do
+  factory :ware do
+    title 'KARTOFAN'
+    specs 'Best potato in the world!'
+    #association :category, factory: :category
+    category
+  end
 end

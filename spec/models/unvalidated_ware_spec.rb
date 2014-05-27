@@ -5,7 +5,7 @@
 #  id         :integer          not null, primary key
 #  barode     :string(255)
 #  comment    :string(255)
-#  id_client  :integer
+#  client_id  :integer
 #  created_at :datetime
 #  updated_at :datetime
 #

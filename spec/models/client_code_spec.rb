@@ -3,8 +3,8 @@
 # Table name: client_codes
 #
 #  id         :integer          not null, primary key
-#  id_client  :integer
-#  id_barcode :integer
+#  client_id  :integer
+#  barcode_id :integer
 #  created_at :datetime
 #  updated_at :datetime
 #

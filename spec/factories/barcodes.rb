@@ -9,12 +9,9 @@
 #  updated_at :datetime
 #
 
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
-one:
-  number: MyString
-  id_ware: 1
-
-two:
-  number: MyString
-  id_ware: 1
+FactoryGirl.define do
+  factory :barcode do
+    number '123456'
+    ware
+  end
+end

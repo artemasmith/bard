@@ -4,7 +4,7 @@
     <data-source source="LOCAL" name="Rails bard: development" uuid="501c1d6c-2f45-45ee-a79c-8fbc64f0f7e4">
       <driver-ref>postgresql</driver-ref>
       <jdbc-driver>org.postgresql.Driver</jdbc-driver>
-      <jdbc-url>jdbc:postgresql:bardtest</jdbc-url>
+      <jdbc-url>jdbc:postgresql:bard_development</jdbc-url>
       <user-name>root</user-name>
       <user-password>dfe1dfcbdfc6dfc5dfd9dfc2dfcb</user-password>
       <libraries />

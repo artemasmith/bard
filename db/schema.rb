@@ -11,21 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140522035900) do
+ActiveRecord::Schema.define(version: 20140527122751) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "barcodes", force: true do |t|
     t.string   "number"
-    t.integer  "id_ware"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "cat_props", force: true do |t|
-    t.integer  "id_cat"
-    t.integer  "id_prop"
+    t.integer  "ware_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -37,18 +30,25 @@ ActiveRecord::Schema.define(version: 20140522035900) do
     t.datetime "updated_at"
   end
 
+  create_table "category_properties", force: true do |t|
+    t.integer  "category_id"
+    t.integer  "property_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "characteristics", force: true do |t|
-    t.integer  "id_ware"
-    t.integer  "id_prop"
-    t.integer  "id_val"
+    t.integer  "ware_id"
+    t.integer  "property_id"
+    t.integer  "value_id"
     t.integer  "id_ext"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "client_codes", force: true do |t|
-    t.integer  "id_client"
-    t.integer  "id_barcode"
+    t.integer  "client_id"
+    t.integer  "barcode_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -89,7 +89,7 @@ ActiveRecord::Schema.define(version: 20140522035900) do
   add_index "clients", ["reset_password_token"], name: "index_clients_on_reset_password_token", unique: true, using: :btree
 
   create_table "operation_logs", force: true do |t|
-    t.integer  "id_type"
+    t.integer  "type_id"
     t.string   "event"
     t.datetime "time"
     t.datetime "created_at"
@@ -119,14 +119,14 @@ ActiveRecord::Schema.define(version: 20140522035900) do
   create_table "unvalidated_wares", force: true do |t|
     t.string   "barode"
     t.string   "comment"
-    t.integer  "id_client"
+    t.integer  "client_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "user_groups", force: true do |t|
-    t.integer  "id_group"
-    t.integer  "id_user"
+    t.integer  "group_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -153,8 +153,8 @@ ActiveRecord::Schema.define(version: 20140522035900) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "values", force: true do |t|
-    t.integer  "id_prop"
-    t.string   "value"
+    t.integer  "property_id"
+    t.string   "content"
     t.integer  "id_ext"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -162,10 +162,10 @@ ActiveRecord::Schema.define(version: 20140522035900) do
 
   create_table "wares", force: true do |t|
     t.string   "title"
-    t.integer  "id_parent"
+    t.integer  "parent_id"
     t.text     "specs"
-    t.integer  "id_cat"
-    t.integer  "type"
+    t.integer  "category_id"
+    t.integer  "ware_type"
     t.integer  "id_ext"
     t.datetime "created_at"
     t.datetime "updated_at"

@@ -4,15 +4,15 @@
 #
 #  id         :integer          not null, primary key
 #  number     :string(255)
-#  id_ware    :integer
+#  ware_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #
 
 class Barcode < ActiveRecord::Base
   validates :number, presence: true, uniqueness: true, length: { maximum: 50 }
-  validates :id_ware, numericality: true, presence: true 
-  belongs_to :ware, foreign_key: :id_ware
+  validates :ware_id, numericality: true, presence: true
+  belongs_to :ware
   has_many :client_code
 
   def xml_response

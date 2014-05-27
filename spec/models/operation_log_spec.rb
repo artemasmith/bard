@@ -3,7 +3,7 @@
 # Table name: operation_logs
 #
 #  id         :integer          not null, primary key
-#  id_type    :integer
+#  type_id    :integer
 #  event      :string(255)
 #  time       :datetime
 #  created_at :datetime

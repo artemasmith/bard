@@ -1,15 +1,20 @@
 # == Schema Information
 #
-# Table name: values
+# Table name: characteristics
 #
 #  id          :integer          not null, primary key
+#  ware_id     :integer
 #  property_id :integer
-#  content     :string(255)
+#  value_id    :integer
 #  id_ext      :integer
 #  created_at  :datetime
 #  updated_at  :datetime
 #
 
-class Value < ActiveRecord::Base
-  belongs_to :property
+FactoryGirl.define do
+  factory :characteristic do
+    ware
+    property
+    value
+  end
 end

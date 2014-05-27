@@ -10,6 +10,9 @@
 #  updated_at  :datetime
 #
 
-class Value < ActiveRecord::Base
-  belongs_to :property
+FactoryGirl.define do
+  factory :value do
+    property
+    content 'Test value'
+  end
 end

@@ -10,30 +10,48 @@ class Api::V1::BarcodesController < ApplicationController
     xml = Nokogiri::XML ''
     body = Nokogiri::XML::Node.new 'body', xml
     barcodes = Nokogiri::XML::Node.new 'barcodes', xml
-    groups = Nokogiri::XML::Node.new 'groups', xml
+    # groups = Nokogiri::XML::Node.new 'groups', xml
     characteristics = Nokogiri::XML::Node.new 'characteristics', xml
     categories = Nokogiri::XML::Node.new 'categories', xml
     properties = Nokogiri::XML::Node.new 'properties', xml
     values = Nokogiri::XML::Node.new 'values', xml
     wares = Nokogiri::XML::Node.new 'wares', xml
     errors = Nokogiri::XML::Node.new 'errors', xml
+
     numbers = params[:number].split(',')
     numbers.each do |n|
       b = Barcode.find_by_number(n)
       if b
         barcode = Nokogiri::XML::Node.new 'barcode', xml
         barcode[:number] = b.number
-        barcode[:id_ware] = b.id_ware
-        barcode[:id_char] = b.ware.characteristics.last.id
+        barcode[:id_ware] = b.ware_id
+        barcode[:id_char] = b.ware.characteristics.last.id if !b.ware.characteristics.blank?
         barcodes.add_child(barcode)
 
         #characteristics
         b.ware.characteristics.each do |chr|
           character = Nokogiri::XML::Node.new 'characteristic', xml
-          character[:id_ware] = chr.id_ware
-          character[:id_prop] = chr.id_prop
-          character[:id_val] = chr.id_val
+          character[:id_ware] = chr.ware_id
+          character[:id_prop] = chr.property_id
+          character[:id_val] = chr.value_id
+          character[:id_ext] = chr.id_ext
           characteristics.add_child(character)
+
+          value = Nokogiri::XML::Node.new 'value', xml
+          value[:val] = chr.value.content
+          value[:id_ext] = chr.value.id_ext
+          values.add_child(value)
+
+          property = Nokogiri::XML::Node.new 'property', xml
+          property[:title] = chr.property.title
+          property[:id_ext] = chr.property.id_ext
+          properties.add_child(property)
+
+          category = Nokogiri::XML::Node.new 'category', xml
+          category[:title] = b.ware.category.title
+          category[:id_ext] = b.ware.category.id_ext
+          categories.add_child(category)
+
         end
 
       else
@@ -46,7 +64,7 @@ class Api::V1::BarcodesController < ApplicationController
     end
     xml.add_child(body)
     xml.children.first.add_child(barcodes)
-    xml.children.first.add_child(groups)
+    # xml.children.first.add_child(groups)
     xml.children.first.add_child(characteristics)
     xml.children.first.add_child(categories)
     xml.children.first.add_child(properties)
