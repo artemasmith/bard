@@ -15,7 +15,10 @@ class Barcode < ActiveRecord::Base
   belongs_to :ware
   has_many :client_code
 
-  def xml_response
-  	
+  def to_xml_node document
+  	bcode = Nokogiri::XML::Node.new 'barcode', document
+    bcode[:number] = number
+    bcode[:ware_id] = ware_id
+    bcode
   end
 end

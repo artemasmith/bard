@@ -2,7 +2,7 @@ var Barcode = function(data){
 	this.id = data.id;
 	this.number = data.number;
 	this.created_at = data.created_at;
-	this.id_ware = data.id_ware;
+	this.ware_id = data.ware_id;
 }
 
 var TableVM = function(){
@@ -10,7 +10,7 @@ var TableVM = function(){
 	this.barcodes = ko.observableArray();
 	<% if @barcodes %>
 	<% @barcodes.each do |b|%>
-		this.barcodes.push(new Barcode({ number: '<%= b.number%>', id: '<%= b.id%>', created_at: '<%=b.created_at%>', id_ware: '<%= b.id_ware%>' }));
+		this.barcodes.push(new Barcode({ number: '<%= b.number%>', id: '<%= b.id%>', created_at: '<%=b.created_at%>', ware_id: '<%= b.ware_id%>' }));
 	<% end %>
 	<% end %>
 	this.deleteBarcode = function(id){alert(id.id)};

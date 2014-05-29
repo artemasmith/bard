@@ -3,7 +3,25 @@ class Api::V1::BarcodesController < ApplicationController
   before_action :authenticate_client
 
   def index
+    #params[:page] - respond for pagination
+    xml = Nokogiri::XML ''
+    body = Nokogiri::XML::Node.new 'body', xml
+    barcodes = Nokogiri::XML::Node.new 'barcodes', xml
+    wares = Nokogiri::XML::Node.new 'wares', xml
 
+    #Temporaly send all barcodes ??
+    @shop.categories.each do |cat|
+      cat.wares.each do |ware|
+        wares.add_child ware.to_xml_node xml
+        ware.barcodes.each { |barcode| barcodes.add_child barcode.to_xml_node xml }
+      end
+    end
+
+    xml.add_child body
+    body.add_child barcodes
+    body.add_child wares
+
+    render xml: xml, status: 200
   end
 
   def show
@@ -87,6 +105,14 @@ class Api::V1::BarcodesController < ApplicationController
 
   def authenticate_client
     @client = Client.find_by_login(params[:login])
+    if @client.blank?
+      render xml: Client.render_error('wrong login'), status: 401
+      return
+    end
     @shop = @client.shops.where(auth_token: params[:auth_token])[0]
+    if @shop.blank?
+      render xml: Client.render_error('wrong auth_token'), status: 401
+      return
+    end
   end
 end

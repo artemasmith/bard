@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe 'Barcodes api' do
-  #let(:client){ FactoryGirl.create(:client) }
-  #let(:auth_key){ client.shops.create() }
 
   before(:each) do
     @client = FactoryGirl.create(:client)
@@ -24,7 +22,7 @@ describe 'Barcodes api' do
     # puts "barcode = #{Barcode.find_by_number('123456')}"
     # puts "char_ID = #{Barcode.last.ware.characteristics.last}"
     get '/api/barcode', { login: @client.login, auth_token: @auth_token, number: '123456' }, { "Accept" => "application/xml" }
-    puts response.body
+    #puts response.body
     expect(response.status).to eq 200
   end
 
@@ -57,6 +55,41 @@ describe 'Barcodes api' do
     get '/api/barcode', { login: @client.login, auth_token: @auth_token, number: '123456' }, { "Accept" => "application/xml" }
     xml = Nokogiri::XML(response.body)
     expect(xml.xpath('//values').children.count).to be > 0
+  end
+
+  context 'authentication' do
+    #AUTHENTICATION
+    it 'should raise error due to authentication' do
+      get '/api/barcode', { login: 'vaska@vs.ru', auth_token: @auth_token, number: '123456' }, { "Accept" => "application/xml" }
+      #puts response.body
+      expect(response.status).to eq 401
+    end
+
+    it 'should raise error due wrong barcode number' do
+      get '/api/barcode', { login: @client.login, auth_token: @auth_token, number: '11111111111' }, { "Accept" => "application/xml" }
+      #puts response.body
+      expect(response.status).to eq 400
+    end
+  end
+
+  #Test INDEX action in barcodes controller
+  context 'index action' do
+
+    it 'index action works fine' do
+      get '/api/barcodes', { login: @client.login, auth_token: @auth_token, number: '123456' }, { "Accept" => "application/xml" }
+      expect(response.status).to eq 200
+    end
+
+    it 'should return all client shops category wares' do
+      cat = FactoryGirl.create :category
+      @client.shops.last.categories << cat
+      ware = FactoryGirl.create :ware, category_id: cat.id
+      get '/api/barcodes', { login: @client.login, auth_token: @auth_token, number: '123456' }, { "Accept" => "application/xml" }
+      xml = Nokogiri::XML response.body
+      xware = ''
+      xml.xpath('//wares').children.each { |c| xware = c unless c.blank?}
+      expect(xware[:title]).to eq ware.title
+    end
   end
 
 end

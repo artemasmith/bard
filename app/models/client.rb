@@ -31,4 +31,12 @@ class Client < ActiveRecord::Base
   has_many :client_codes
   has_many :shops, class_name: 'ClientShop', foreign_key: :client_id
   has_many :unvalidated_wares
+
+  def self.render_error msg
+    xml = Nokogiri::XML ''
+    errors = Nokogiri::XML::Node.new 'errors', xml
+    errors.content = msg
+    xml.add_child(errors)
+    xml
+  end
 end
