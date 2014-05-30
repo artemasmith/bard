@@ -5,7 +5,6 @@ class ClientsController < ApplicationController
   end
 
   def cabinet
-    @client = current_client
   end
 
   def stats

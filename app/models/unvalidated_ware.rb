@@ -11,5 +11,6 @@
 #
 
 class UnvalidatedWare < ActiveRecord::Base
+  resourcify
   belongs_to :client
 end

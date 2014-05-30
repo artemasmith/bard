@@ -13,7 +13,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  type                   :integer
+#  user_type              :integer
 #  id_role                :integer
 #  name                   :string(255)
 #  created_at             :datetime
@@ -23,13 +23,15 @@
 #
 
 class Client < User
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  #FOR ROLIFY
+  self.adapter = User.adapter
 
   has_many :unvalidated_ware
   has_many :client_codes
   has_many :shops, class_name: 'ClientShop', foreign_key: :client_id
   has_many :unvalidated_wares
+
+  after_create :set_role
 
   def self.render_error msg
     xml = Nokogiri::XML ''
@@ -37,5 +39,10 @@ class Client < User
     errors.content = msg
     xml.add_child(errors)
     xml
+  end
+  protected
+
+  def set_role
+    self.add_role :client
   end
 end

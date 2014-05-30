@@ -13,7 +13,7 @@
 #  last_sign_in_at        :datetime
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
-#  type                   :integer
+#  user_type              :integer
 #  id_role                :integer
 #  name                   :string(255)
 #  created_at             :datetime
@@ -30,4 +30,8 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_and_belongs_to_many :group, class_name: 'GroupUser'
   has_one :role
+
+  def get_name
+    name || email
+  end
 end

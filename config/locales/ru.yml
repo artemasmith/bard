@@ -9,3 +9,4 @@ ru:
   logout: 'Выйти'
   sign_in: 'Войти'
   sign_up: 'Регистрация'
+  you_login_as: 'Вы вошли как'

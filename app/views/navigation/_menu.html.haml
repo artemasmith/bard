@@ -8,6 +8,10 @@
         %li= link_to t(:cabinet), cabinet_client_path(current_client)
         %li= link_to t(:settings), settings_client_path(current_client)
         %li= link_to t(:shops), shops_path(current_client)
+        %li.divider
+          .span5
+            = t :you_login_as
+            = current_client.get_name
         %li= link_to t(:logout), destroy_client_session_path, method: :delete
       -else
         %li.divider
