@@ -1,0 +1,11 @@
+ru:
+  welcome: "Hello world"
+  main_page: 'Главная'
+  about: 'О нас'
+  contact_us: 'Напишите нам'
+  cabinet: 'Личный кабинет'
+  settings: 'Настройки'
+  shops: 'Магазины'
+  logout: 'Выйти'
+  sign_in: 'Войти'
+  sign_up: 'Регистрация'

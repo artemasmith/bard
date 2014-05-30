@@ -1,5 +1,5 @@
 require 'spec_helper'
 
-describe Role do
+describe "shops/destroy.html.haml" do
   pending "add some examples to (or delete) #{__FILE__}"
 end

@@ -23,7 +23,7 @@
 #
 
 FactoryGirl.define do
-  factory :client do
+  factory :clients do
     title 'test'
     email 'test@test.ru'
     login 'login'

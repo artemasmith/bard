@@ -1,0 +1,17 @@
+.row
+  .span12
+    %ul.nav.nav-pills
+      %li= link_to t(:main_page), greetings_index_path
+      %li= link_to t(:about), greetings_about_path
+      %li= link_to t(:contact_us), greetings_contact_path
+      -if current_client
+        %li= link_to t(:cabinet), cabinet_client_path(current_client)
+        %li= link_to t(:settings), settings_client_path(current_client)
+        %li= link_to t(:shops), shops_path(current_client)
+        %li= link_to t(:logout), destroy_client_session_path, method: :delete
+      -else
+        %li.divider
+          .span7
+        %li.active= link_to t(:sign_in), client_session_path
+        %li= link_to t(:sign_up), new_client_registration_path
+

@@ -18,9 +18,12 @@
 #  name                   :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  login                  :integer
+#  specs                  :text
 #
 
 class User < ActiveRecord::Base
+  rolify
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,

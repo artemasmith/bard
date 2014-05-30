@@ -18,6 +18,8 @@
 #  name                   :string(255)
 #  created_at             :datetime
 #  updated_at             :datetime
+#  login                  :integer
+#  specs                  :text
 #
 
 require 'spec_helper'

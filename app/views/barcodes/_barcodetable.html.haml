@@ -1,13 +1,13 @@
 %table.table.table-bordered
   %th= t :id
-  %th= t :id_ware
+  %th= t :ware_id
   %th= t :barcode_number
   %th= t :created_at
   %td
   -@barcodes.each do |b|
     %tbody
       %td= b.id
-      %td= b.id_ware
+      %td= b.ware_id
       %td= b.number
       %td= b.created_at
       %td

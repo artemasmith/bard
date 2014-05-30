@@ -3,7 +3,7 @@ require 'spec_helper'
 describe 'Barcodes api' do
 
   before(:each) do
-    @client = FactoryGirl.create(:client)
+    @client = FactoryGirl.create(:clients)
     @client.shops.create()
     @auth_token = @client.shops.last.auth_token
     ware = FactoryGirl.create(:ware)
@@ -14,10 +14,10 @@ describe 'Barcodes api' do
   end
 
   it 'should get barcodes' do
-    #@client = FactoryGirl.create(:client)
-    #@client.shops.create()
-    #@auth_token = @client.shops.last.auth_token
-    # puts "client = #{@client}"
+    #@clients = FactoryGirl.create(:clients)
+    #@clients.shops.create()
+    #@auth_token = @clients.shops.last.auth_token
+    # puts "clients = #{@clients}"
     # puts "auth_token = #{@auth_token}"
     # puts "barcode = #{Barcode.find_by_number('123456')}"
     # puts "char_ID = #{Barcode.last.ware.characteristics.last}"
@@ -80,7 +80,7 @@ describe 'Barcodes api' do
       expect(response.status).to eq 200
     end
 
-    it 'should return all client shops category wares' do
+    it 'should return all clients shops category wares' do
       cat = FactoryGirl.create :category
       @client.shops.last.categories << cat
       ware = FactoryGirl.create :ware, category_id: cat.id

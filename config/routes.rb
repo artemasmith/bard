@@ -1,17 +1,25 @@
 Bard::Application.routes.draw do
-  devise_for :clients
-  #get "client_auth/get_token"
-  #get "client_auth/update_token"
+
+  get "greetings/index"
+  get "greetings/about"
+  get "greetings/contact"
+  resources :clients, only: [:cabinet, :settings] do
+    member do
+      get :cabinet
+      get :settings
+      get :stats
+    end
+  end
+  resources :shops
   resources :barcodes
-  devise_for :users
-  root 'barcodes#index'
+
+  #devise_for :users
+  devise_for :clients
+
+  root 'greetings#index'
 
   namespace :api, defaults: { format: :xml } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
-      #TODO выкосить эту пародию на авторизацию
-      match '/auth' => 'client_auth#create', :via => :post, as: :create_session
-      match '/auth' => 'client_auth#update', :via => :put, as: :update_session
-
       match '/barcode' => 'barcodes#show', via: :get, as: :show_barcode_api
       match '/barcode' => 'barcodes#create', via: :post, as: :create_barcode_api
       match '/barcodes' => 'barcodes#index', via: :get, as: :all_barcodes_api

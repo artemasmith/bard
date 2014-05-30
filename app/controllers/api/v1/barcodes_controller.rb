@@ -73,7 +73,7 @@ class Api::V1::BarcodesController < ApplicationController
         end
 
       else
-        #@client.unvalidated_wares.create()
+        #@clients.unvalidated_wares.create()
         barcode = Nokogiri::XML::Node.new 'error', xml
         barcode.content = "Can't find barcode with given number"
         errors.add_child(barcode)
