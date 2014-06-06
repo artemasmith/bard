@@ -20,6 +20,7 @@
 #  updated_at             :datetime
 #  login                  :integer
 #  specs                  :text
+#  balance                :decimal(, )
 #
 
 class User < ActiveRecord::Base
@@ -30,8 +31,22 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
   has_and_belongs_to_many :group, class_name: 'GroupUser'
   has_one :role
+  has_many :shops
+  has_and_belongs_to_many :wares
+  has_and_belongs_to_many :categories
+  has_many :unvalidated_wares
+  has_many :activities
+  belongs_to :tariff
+
+  after_create :set_tariff
 
   def get_name
     name || email
+  end
+
+  protected
+
+  def set_tariff
+    self.update(tariff: Tariff.find_by_title('Free'))
   end
 end

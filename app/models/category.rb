@@ -10,7 +10,9 @@
 #
 
 class Category < ActiveRecord::Base
+  resourcify
+  has_and_belongs_to_many :users
   has_and_belongs_to_many :property
-  has_and_belongs_to_many :client_shops
+  has_and_belongs_to_many :shops
   has_many :wares
 end

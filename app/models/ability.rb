@@ -7,7 +7,7 @@ class Ability
       can :manage, :all
     elsif user.client?
       can :read, :all
-      can :manage, ClientShop, client_id: user.id
+      can :manage, Shop, client_id: user.id
       can :manage, UnvalidatedWare, client_id: user.id
       can :manage, ClientCode, client_id: user.id
       can :update, Client, id: user.id

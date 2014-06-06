@@ -17,7 +17,7 @@
     { title: 'мясо' },
     { title: 'рыба' }
 ].each do |category|
-  Category.create(category)
+  Category.find_or_create_by(category)
 end
 
 #PROPERIES
@@ -27,18 +27,18 @@ end
     { title: 'срок хранения' },
     { title: 'крутость' }
 ].each do |property|
-  Property.create(property)
+  Property.find_or_create_by(property)
 end
 
 #VALUES
 [
-    { property_id: 1, value: '30%' },
-    { property_id: 1, value: '20%' },
-    { property_id: 1, value: '40%' },
-    { property_id: 2, value: 'белый' },
-    { property_id: 2, value: 'черный' }
+    { property_id: 1, content: '30%' },
+    { property_id: 1, content: '20%' },
+    { property_id: 1, content: '40%' },
+    { property_id: 2, content: 'белый' },
+    { property_id: 2, content: 'черный' }
 ].each do |value|
-  Value.create(value)
+  Value.find_or_create_by(value)
 end
 
 #WARES
@@ -50,7 +50,7 @@ end
     { title: 'Греча', specs: 'Богатая реча', category_id: 2 },
     { title: 'Рис', specs: 'Не смотри вниз', category_id: 2 },
 ].each do |ware|
-  Ware.create(ware)
+  Ware.find_or_create_by(ware)
 end
 
 #CHARACTERISTICS
@@ -63,7 +63,7 @@ end
     { property_id: 2, ware_id: 3, value_id: 2},
     { property_id: 3, ware_id: 3, value_id: 3}
 ].each do |char|
-  Characteristic.create(char)
+  Characteristic.find_or_create_by(char)
 end
 
 #BARCODES
@@ -76,5 +76,16 @@ end
     { number: '12309821308', ware_id: 5 },
     { number: '23434234234', ware_id: 5 }
 ].each do |barcode|
-  Barcode.create(barcode)
+  Barcode.find_or_create_by(barcode)
+end
+
+#TARIFFS
+
+[
+    { title: 'Free', cost: 0.0, shops_count: 0, categories_count: 0 },
+    { title: 'Little', cost: 100.0, shops_count: 1, categories_count: 10 },
+    { title: 'Middle', cost: 1000.0, shops_count: 10, categories_count: 20 },
+    { title: 'Large', cost: 1000.0, shops_count: 100, categories_count: 60 }
+].each do |tariff|
+  Tariff.find_or_create_by tariff
 end

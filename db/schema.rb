@@ -11,10 +11,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140530102827) do
+ActiveRecord::Schema.define(version: 20140606102835) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activities", force: true do |t|
+    t.decimal  "amount_debet",      default: 0.0
+    t.decimal  "amount_credit",     default: 0.0
+    t.integer  "payment_system_id"
+    t.string   "state"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "barcodes", force: true do |t|
     t.string   "number"
@@ -30,9 +40,19 @@ ActiveRecord::Schema.define(version: 20140530102827) do
     t.datetime "updated_at"
   end
 
-  create_table "categories_client_shops", force: true do |t|
+  create_table "categories_clients", force: true do |t|
+    t.integer "client_id"
     t.integer "category_id"
-    t.integer "client_shop_id"
+  end
+
+  create_table "categories_shops", force: true do |t|
+    t.integer "category_id"
+    t.integer "shop_id"
+  end
+
+  create_table "categories_users", force: true do |t|
+    t.integer "user_id"
+    t.integer "category_id"
   end
 
   create_table "category_properties", force: true do |t|
@@ -52,23 +72,16 @@ ActiveRecord::Schema.define(version: 20140530102827) do
   end
 
   create_table "client_codes", force: true do |t|
-    t.integer  "client_id"
+    t.integer  "user_id"
     t.integer  "barcode_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "client_shops", force: true do |t|
-    t.string   "ip"
-    t.integer  "out_id"
-    t.integer  "client_id"
-    t.string   "auth_token"
-    t.datetime "token_expire"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+  create_table "clients_wares", force: true do |t|
+    t.integer "client_id"
+    t.integer "ware_id"
   end
-
-  add_index "client_shops", ["auth_token"], name: "index_client_shops_on_auth_token", using: :btree
 
   create_table "operation_logs", force: true do |t|
     t.integer  "type_id"
@@ -102,10 +115,34 @@ ActiveRecord::Schema.define(version: 20140530102827) do
   add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
   add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
+  create_table "shops", force: true do |t|
+    t.string   "ip"
+    t.integer  "out_id"
+    t.integer  "user_id"
+    t.string   "auth_token"
+    t.datetime "token_expire"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "address"
+    t.string   "title"
+    t.string   "shop_type"
+  end
+
+  add_index "shops", ["auth_token"], name: "index_shops_on_auth_token", using: :btree
+
+  create_table "tariffs", force: true do |t|
+    t.string   "title"
+    t.decimal  "cost"
+    t.integer  "shops_count"
+    t.integer  "categories_count"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "unvalidated_wares", force: true do |t|
     t.string   "barode"
     t.string   "comment"
-    t.integer  "client_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -135,6 +172,8 @@ ActiveRecord::Schema.define(version: 20140530102827) do
     t.datetime "updated_at"
     t.integer  "login"
     t.text     "specs"
+    t.decimal  "balance"
+    t.integer  "tariff_id"
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -146,6 +185,11 @@ ActiveRecord::Schema.define(version: 20140530102827) do
   end
 
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
+
+  create_table "users_wares", force: true do |t|
+    t.integer "user_id"
+    t.integer "ware_id"
+  end
 
   create_table "values", force: true do |t|
     t.integer  "property_id"

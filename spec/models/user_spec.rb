@@ -20,6 +20,7 @@
 #  updated_at             :datetime
 #  login                  :integer
 #  specs                  :text
+#  balance                :decimal(, )
 #
 
 require 'spec_helper'

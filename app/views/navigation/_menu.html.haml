@@ -4,18 +4,18 @@
       %li= link_to t(:main_page), greetings_index_path
       %li= link_to t(:about), greetings_about_path
       %li= link_to t(:contact_us), greetings_contact_path
-      -if current_client
-        %li= link_to t(:cabinet), cabinet_client_path(current_client)
-        %li= link_to t(:settings), settings_client_path(current_client)
-        %li= link_to t(:shops), shops_path(current_client)
+      -if current_user
+        %li= link_to t(:cabinet), cabinet_user_path(current_user)
+        %li= link_to t(:settings), settings_user_path(current_user)
+        %li= link_to t(:shops), user_shops_path(current_user)
         %li.divider
           .span5
             = t :you_login_as
-            = current_client.get_name
-        %li= link_to t(:logout), destroy_client_session_path, method: :delete
+            = current_user.get_name
+        %li= link_to t(:logout), destroy_user_session_path, method: :delete
       -else
         %li.divider
           .span7
-        %li.active= link_to t(:sign_in), client_session_path
-        %li= link_to t(:sign_up), new_client_registration_path
+        %li.active= link_to t(:sign_in), user_session_path
+        %li= link_to t(:sign_up), new_user_registration_path
 

@@ -1,2 +1,25 @@
-%h1 Shops#index
-%p Find me in app/views/shops/index.html.haml
+%h1= t(:your_shops)
+.row
+  .span9
+    %table.table.table-bordered
+      %tr
+        %th= t(:ip)
+        %th= t(:title)
+        %th= t(:address)
+        %td
+      - @shops.each do |shop|
+        %tr
+          %td= shop.ip
+          %td= shop.title
+          %td= shop.address
+          %td
+            .span2
+              = link_to t(:show), user_shop_path(client_id: current_user.id, id: shop.id), class: 'btn'
+            .span2
+              = link_to t(:edit), edit_user_shop_path(client_id: current_user.id, id: shop.id), class: 'btn'
+            .span2
+              = link_to t(:delete),user_shop_path(client_id: current_user.id, id: shop.id), method: :delete, class: 'btn btn-danger'
+.row
+  =link_to t(:create), new_user_shop_path, class: 'btn'
+
+
