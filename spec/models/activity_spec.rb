@@ -3,8 +3,8 @@
 # Table name: activities
 #
 #  id                :integer          not null, primary key
-#  amount_debet      :decimal(, )
-#  amount_credit     :decimal(, )
+#  amount_debet      :decimal(, )      default(0.0)
+#  amount_credit     :decimal(, )      default(0.0)
 #  payment_system_id :integer
 #  state             :string(255)
 #  user_id           :integer

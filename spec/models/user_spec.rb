@@ -21,6 +21,7 @@
 #  login                  :integer
 #  specs                  :text
 #  balance                :decimal(, )
+#  tariff_id              :integer
 #
 
 require 'spec_helper'

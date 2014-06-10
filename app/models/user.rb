@@ -21,6 +21,7 @@
 #  login                  :integer
 #  specs                  :text
 #  balance                :decimal(, )
+#  tariff_id              :integer
 #
 
 class User < ActiveRecord::Base
@@ -37,6 +38,8 @@ class User < ActiveRecord::Base
   has_many :unvalidated_wares
   has_many :activities
   belongs_to :tariff
+
+  accepts_nested_attributes_for :tariff
 
   after_create :set_tariff
 

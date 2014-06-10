@@ -14,7 +14,12 @@ class UsersController < ApplicationController
   end
 
   def update
-
+    @user = User.find(params[:id])
+    if @user.update(user_params)
+      redirect_to cabinet_user_path(@user)
+    else
+      render 'settings'
+    end
   end
 
   def destroy
@@ -23,5 +28,9 @@ class UsersController < ApplicationController
 
   def create
 
+  end
+
+  def user_params
+    params.require(:user).permit(:name, :email, :specs, :password, :password_confirmation)
   end
 end

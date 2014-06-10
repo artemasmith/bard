@@ -1,0 +1,13 @@
+%h3= t('tariff.change')
+.row
+  .span2
+    .span6
+      =fields_for :tariff do |tariff|
+        %table.table.table-bordered
+          -Tariff.all.each do |t|
+            %tr
+              %th= t.title
+              %th= t.cost
+              %td
+                =radio_button_tag :tariff_selected, t.id, (current_user.tariff.id == t.id)
+
