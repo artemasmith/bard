@@ -19,12 +19,20 @@ class Shop < ActiveRecord::Base
   resourcify
   belongs_to :user
   has_and_belongs_to_many :categories
+  has_and_belongs_to_many :wares
 
   before_create :generate_token
+  validate :check_user_tariff
 
   def generate_token
     self.auth_token = Digest::MD5.hexdigest("#{self.user_id} - #{Time.now}")
     self.token_expire = Date.today + 1.year
+  end
+
+  def check_user_tariff
+    if self.user.tariff.shops_count == self.user.shops.count
+      errors.add(:user_id, "Too many shops in this tariff")
+    end
   end
 end
  

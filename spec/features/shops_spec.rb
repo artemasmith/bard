@@ -13,9 +13,9 @@ describe 'Shops' do
   context 'authenticated user work with shops' do
     before(:each) do
       #WTF???? FACTORYGIRL NOT WORKING!!!
-      #@client = FactoryGirl.create(:clients)
+      @client = FactoryGirl.create(:user)
       #@client.shops.create(title: 'Test')
-      @client = User.create(:email => 'user@example.com', :password => 'password123')
+      #@client = User.create(:email => 'user@example.com', :password => 'password123')
       @client.shops.create(title: 'Test')
       puts @client
       visit 'users/sign_in'
@@ -25,10 +25,30 @@ describe 'Shops' do
     end
 
     it 'should display shops' do
-      puts @client
+      puts "client= #{@client}"
      # shop = FactoryGirl.create(:shops, client_id: @client.id)
       visit user_shops_path(@client)
       expect(page).to have_content "#{@client.shops.last.address}"
+    end
+
+    it 'should display show wares button' do
+      visit user_shops_path(@client)
+      expect(page).to have_link "Товары"
+    end
+
+    it 'should display show wares button' do
+      visit user_shops_path(@client)
+      expect(page).to have_link "Удалить"
+    end
+
+    it 'should display show wares button' do
+      visit user_shops_path(@client)
+      expect(page).to have_link "Редактировать"
+    end
+
+    it 'should display show wares button' do
+      visit user_shops_path(@client)
+      expect(page).to have_link "Показать"
     end
 
   end

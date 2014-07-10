@@ -18,7 +18,8 @@ class Ware < ActiveRecord::Base
   has_many :characteristics
   belongs_to :category
   has_many :barcodes
-  has_and_belongs_to_many :users
+  #has_and_belongs_to_many :users
+  has_and_belongs_to_many :shops
 
   before_save :generate_ext_id
 

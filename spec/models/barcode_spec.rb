@@ -14,12 +14,12 @@ require 'spec_helper'
 describe Barcode do
   describe 'simple check' do
     it { should respond_to :number }
-    it { should respond_to :id_ware }
+    it { should respond_to :ware_id }
 
     describe 'right and wrong creation' do
-      let(:barcode) { Barcode.new(number: '254321223', id_ware: 1) }
-      let(:wrong_barcode) { Barcode.new(number: '254321223', id_ware: "ddfdfd") }
-      let(:wrong_barcode2) { Barcode.new(id_ware: 1) }
+      let(:barcode) { Barcode.new(number: '254321223', ware_id: 1) }
+      let(:wrong_barcode) { Barcode.new(number: '254321223', ware_id: "ddfdfd") }
+      let(:wrong_barcode2) { Barcode.new(ware_id: 1) }
      
       it 'save right barcode' do
       	expect{ barcode.save }.to change{ Barcode.count }.by(1)

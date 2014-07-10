@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606102835) do
+ActiveRecord::Schema.define(version: 20140703050059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,11 +38,6 @@ ActiveRecord::Schema.define(version: 20140606102835) do
     t.integer  "id_ext"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "categories_clients", force: true do |t|
-    t.integer "client_id"
-    t.integer "category_id"
   end
 
   create_table "categories_shops", force: true do |t|
@@ -76,11 +71,6 @@ ActiveRecord::Schema.define(version: 20140606102835) do
     t.integer  "barcode_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "clients_wares", force: true do |t|
-    t.integer "client_id"
-    t.integer "ware_id"
   end
 
   create_table "operation_logs", force: true do |t|
@@ -129,6 +119,11 @@ ActiveRecord::Schema.define(version: 20140606102835) do
   end
 
   add_index "shops", ["auth_token"], name: "index_shops_on_auth_token", using: :btree
+
+  create_table "shops_wares", force: true do |t|
+    t.integer "shop_id"
+    t.integer "ware_id"
+  end
 
   create_table "tariffs", force: true do |t|
     t.string   "title"

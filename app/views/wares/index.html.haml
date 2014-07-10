@@ -1,0 +1,8 @@
+%h3= t("wares_of_shop") + "  \"#{@shop.title}\" "
+
+//TODO make js change of shop
+= select_tag :shop, options_for_select(current_user.shops.map{ |shop| [shop.title, shop.id] })
+
+=render partial: 'wares/shop_wares', locals: { wares: @wares }
+
+= link_to t(:shops), user_shops_path(current_user)

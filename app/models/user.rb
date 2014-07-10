@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :group, class_name: 'GroupUser'
   has_one :role
   has_many :shops
-  has_and_belongs_to_many :wares
+  #has_and_belongs_to_many :wares
   has_and_belongs_to_many :categories
   has_many :unvalidated_wares
   has_many :activities
@@ -50,6 +50,6 @@ class User < ActiveRecord::Base
   protected
 
   def set_tariff
-    self.update(tariff: Tariff.find_by_title('Free'))
+    self.update(tariff: Tariff.find_by_title('Free')) if self.tariff.blank?
   end
 end

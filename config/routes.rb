@@ -1,5 +1,4 @@
 Bard::Application.routes.draw do
-
   get "users/settings"
   get "users/cabinet"
   get "greetings/index"
@@ -12,6 +11,10 @@ Bard::Application.routes.draw do
       get :stats
     end
     resources :shops
+  end
+
+  resources :shops do
+    resources :wares
   end
 
   resources :barcodes

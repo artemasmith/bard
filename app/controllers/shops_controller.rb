@@ -1,6 +1,7 @@
 class ShopsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_shop, except: [:index, :create, :new]
+  #before_action :check_user_tariff, only: :create
 
   def index
     @shops = current_user.shops
@@ -67,5 +68,9 @@ class ShopsController < ApplicationController
 
   def set_shop
     @shop = Shop.find(params[:id])
+  end
+
+  def check_user_tariff
+    current_user.shops.count == current_user.tariff.shops_count
   end
 end

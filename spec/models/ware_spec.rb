@@ -16,7 +16,17 @@
 require 'spec_helper'
 
 describe Ware do
-    describe "check methods and vars" do
+    describe "check bindings to shop" do
+      it "check binding between shop and ware" do
+        user = FactoryGirl.create(:user)
+        tariff = FactoryGirl.create(:tariff)
+        user.update(tariff: tariff)
+        user.shops.create
+        ware = FactoryGirl.create(:ware)
+        user.shops.last.wares << ware
+        #user.shops.last.wares.create()
 
+        expect(user.shops.last.wares.last).to eq ware
+      end
     end
 end

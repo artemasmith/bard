@@ -18,5 +18,15 @@
 require 'spec_helper'
 
 describe Shop do
-  pending "add some examples to (or delete) #{__FILE__}"
+  context 'wrong shop creation' do
+    it 'should not add shop to user with limit in tariff' do
+      user = FactoryGirl.create(:user)
+      puts "user = #{user}"
+      user.update(tariff: FactoryGirl.create(:tariff))
+      puts "tariff= #{user.tariff}"
+      user.shops.create
+      puts "shops1 = #{user.shops.last}"
+      expect{ user.shops.create }.not_to change{ Shop.count }
+    end
+  end
 end
