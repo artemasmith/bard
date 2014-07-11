@@ -3,14 +3,14 @@ class Ability
 
   def initialize(user)
     user ||= User.new
-    if user.admin?
+    if user.role == "admin"
       can :manage, :all
-    elsif user.client?
+    elsif user.role == "client"
       can :read, :all
-      can :manage, Shop, client_id: user.id
-      can :manage, UnvalidatedWare, client_id: user.id
-      can :manage, ClientCode, client_id: user.id
-      can :update, Client, id: user.id
+      can :manage, Shop, user_id: user.id
+      can :manage, UnvalidatedWare, user_id: user.id
+      can :manage, ClientCode, user_id: user.id
+      #can :update, Client, id: user.id
     else
       can :read, :all
     end

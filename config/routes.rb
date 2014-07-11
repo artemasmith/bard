@@ -14,8 +14,12 @@ Bard::Application.routes.draw do
   end
 
   resources :shops do
-    resources :wares
+    member do
+      get :wares
+    end
   end
+
+  resources :wares
 
   resources :barcodes
 

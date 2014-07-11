@@ -10,6 +10,21 @@ describe 'Shops' do
     end
   end
 
+  context 'user cant create more then tariff max shops' do
+    before(:each) do
+      user1 = FactoryGirl.create(:user)
+      visit 'users/sign_in'
+      fill_in 'user[email]', :with => user2.email
+      fill_in 'user[password]', :with => user2.password
+      click_button 'Sign in'
+    end
+
+    it 'user2 cant delete shop of user1' do
+      visit new_user_shops_path(user_id: user1.id)
+      click_link 'Удалить'
+    end
+  end
+
   context 'authenticated user work with shops' do
     before(:each) do
       #WTF???? FACTORYGIRL NOT WORKING!!!

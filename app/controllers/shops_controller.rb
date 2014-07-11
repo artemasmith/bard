@@ -1,7 +1,12 @@
 class ShopsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :set_shop, except: [:index, :create, :new]
   #before_action :check_user_tariff, only: :create
+
+  def wares
+    @wares = @shop.wares
+  end
 
   def index
     @shops = current_user.shops
@@ -63,7 +68,7 @@ class ShopsController < ApplicationController
   protected
 
   def shop_params
-    params.require(:shop).permit(:ip, :user_id, :out_id, :auth_token, :token_expire, :address, :title, :id)
+    params.require(:shop).permit(:ip, :user_id, :out_id, :address, :title)
   end
 
   def set_shop

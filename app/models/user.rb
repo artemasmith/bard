@@ -22,6 +22,7 @@
 #  specs                  :text
 #  balance                :decimal(, )
 #  tariff_id              :integer
+#  role                   :string(255)
 #
 
 class User < ActiveRecord::Base
@@ -31,7 +32,9 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
   has_and_belongs_to_many :group, class_name: 'GroupUser'
-  has_one :role
+
+  #has_and_belongs_to_many :roles, :join_table => :users_roles
+
   has_many :shops
   #has_and_belongs_to_many :wares
   has_and_belongs_to_many :categories

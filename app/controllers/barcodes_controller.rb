@@ -1,4 +1,5 @@
 class BarcodesController < ApplicationController
+  load_and_authorize_resource
   def index
     @barcodes = Barcode.all
     #@barcodes= @barcodes.paginate(params[:page])    

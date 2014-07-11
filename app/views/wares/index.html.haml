@@ -1,7 +1,7 @@
-%h3= t("wares_of_shop") + "  \"#{@shop.title}\" "
+%h3= t("wares")
 
-//TODO make js change of shop
-= select_tag :shop, options_for_select(current_user.shops.map{ |shop| [shop.title, shop.id] })
+//TODO make js change of shops by selected category
+//= select_tag :shop, options_for_select(current_user.shops.map{ |shop| [shop.title, shop.id] })
 
 =render partial: 'wares/shop_wares', locals: { wares: @wares }
 

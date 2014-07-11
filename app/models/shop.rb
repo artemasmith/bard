@@ -16,6 +16,7 @@
 #
 
 class Shop < ActiveRecord::Base
+  #TODO Fucking rolify! Delete users role field or vanish rolify from Gemfile!
   resourcify
   belongs_to :user
   has_and_belongs_to_many :categories

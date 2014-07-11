@@ -1,9 +1,8 @@
 class WaresController < ApplicationController
-  before_action :set_shop
-  before_action :set_ware, except: [:index, :new, :create]
+  load_and_authorize_resource
+
   def index
-    @wares = @shop.wares
-    @allwares = Ware.all
+    @wares = Ware.all
   end
 
   def show
@@ -24,14 +23,5 @@ class WaresController < ApplicationController
   def destroy
   end
 
-  protected
 
-  def set_shop
-    id = params[:shop_id] || params[:ware][:shop_id]
-    @shop = Shop.find(id.to_i)
-  end
-
-  def set_ware
-    @ware = @shop.wares.find(params[:id])
-  end
 end
