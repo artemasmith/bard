@@ -1,9 +1,9 @@
 class CreateUnvalidatedWares < ActiveRecord::Migration
   def change
     create_table :unvalidated_wares do |t|
-      t.string :barode
+      t.string :barcode
       t.string :comment
-      t.integer :id_client
+      t.integer :user_id
 
       t.timestamps
     end

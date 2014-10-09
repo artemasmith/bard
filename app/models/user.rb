@@ -14,15 +14,13 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  user_type              :integer
-#  id_role                :integer
 #  name                   :string(255)
+#  login                  :string(255)
+#  specs                  :text
+#  tariff_id              :integer
 #  created_at             :datetime
 #  updated_at             :datetime
-#  login                  :integer
-#  specs                  :text
 #  balance                :decimal(, )
-#  tariff_id              :integer
-#  role                   :string(255)
 #
 
 class User < ActiveRecord::Base

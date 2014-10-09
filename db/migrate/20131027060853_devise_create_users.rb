@@ -31,9 +31,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
       # t.datetime :locked_at
 
       #my customization
-      t.integer :type #0 - user 1-group
-      t.integer :id_role
+      t.integer :user_type #0 - user 1-group
       t.string :name #for group only
+      t.string :login
+      t.text :specs
+      t.integer :tariff_id
 
 
       t.timestamps

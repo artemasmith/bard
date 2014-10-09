@@ -2,10 +2,10 @@ class CreateWares < ActiveRecord::Migration
   def change
     create_table :wares do |t|
       t.string :title
-      t.integer :id_parent
+      t.integer :parent_id
       t.text :specs
-      t.integer :id_cat
-      t.integer :type
+      t.integer :category_id
+      t.integer :ware_type
       t.integer :id_ext
 
       t.timestamps

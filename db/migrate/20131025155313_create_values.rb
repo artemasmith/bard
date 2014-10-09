@@ -1,9 +1,9 @@
 class CreateValues < ActiveRecord::Migration
   def change
     create_table :values do |t|
-      t.integer :id_prop
-      t.string :value
+      t.string :content
       t.integer :id_ext
+      t.integer :property_id
 
       t.timestamps
     end

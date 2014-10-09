@@ -14,19 +14,22 @@
 #  current_sign_in_ip     :string(255)
 #  last_sign_in_ip        :string(255)
 #  user_type              :integer
-#  id_role                :integer
 #  name                   :string(255)
+#  login                  :string(255)
+#  specs                  :text
+#  tariff_id              :integer
 #  created_at             :datetime
 #  updated_at             :datetime
-#  login                  :integer
-#  specs                  :text
 #  balance                :decimal(, )
-#  tariff_id              :integer
-#  role                   :string(255)
 #
 
 require 'spec_helper'
 
 describe User do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe 'after creation tariff is setted properly' do
+    it 'new user - tariff free' do
+      user = create(:user)
+      user.tariff.last.title.should eq 'Free'
+    end
+  end
 end
