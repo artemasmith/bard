@@ -31,5 +31,6 @@ describe User do
       user = create(:user)
       user.tariff.last.title.should eq 'Free'
     end
+
   end
 end

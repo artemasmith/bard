@@ -42,15 +42,19 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :tariff
 
-  after_create :set_tariff
+  after_create :set_initial_tariff
 
   def get_name
     name || email
   end
 
+  def update_tariff
+
+  end
+
   protected
 
-  def set_tariff
+  def set_initial_tariff
     self.update(tariff: Tariff.find_by_title('Free')) if self.tariff.blank?
   end
 end
