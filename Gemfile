@@ -17,7 +17,10 @@ gem 'haml-rails'
 #gem 'knockoutjs-rails'
 gem 'will_paginate'
 gem 'nokogiri'
+gem 'nested_form'
 
+gem 'russian'
+#gem 'state_machine'
 
 gem 'annotate'
 # Use SCSS for stylesheets

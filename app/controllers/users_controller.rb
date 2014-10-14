@@ -15,11 +15,20 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
+    if @user.update(user_params) && @user.errors.blank?
       redirect_to cabinet_user_path(@user)
     else
       render 'settings'
     end
+  end
+
+  def update_tariff
+    @user = User.find(params[:id].to_i)
+    if params[:tariff_id].present?
+      @msg = @user.update_tariff(params[:tariff_id].to_i)
+    end
+
+    render 'settings'
   end
 
   def destroy

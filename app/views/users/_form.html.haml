@@ -1,8 +1,7 @@
-%h3= t('user.settings')
-.row
-  .span2
-  .span6
-    =form_for @user do |f|
+= form_for @user do |f|
+  .row
+    .span2
+    .span6
       %table.table.table-bordered
         %tr
           %th= t('user.name')
@@ -13,5 +12,7 @@
         %tr
           %th= t('user.specs')
           %td= f.text_field :specs
-      = f.submit t(:save), class: 'btn'
-
+  .row
+    .span2
+    .span6
+  = f.submit t(:save), class: 'btn'

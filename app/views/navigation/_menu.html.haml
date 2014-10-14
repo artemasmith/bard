@@ -1,9 +1,9 @@
 .row
   .span12
     %ul.nav.nav-pills
-      %li= link_to t(:main_page), greetings_index_path
-      %li= link_to t(:about), greetings_about_path
-      %li= link_to t(:contact_us), greetings_contact_path
+      %li= link_to t(:main_page), greetings_path
+      %li= link_to t(:about), about_greetings_path
+      %li= link_to t(:contact_us), contact_greetings_path
       -if current_user
         %li= link_to t(:cabinet), cabinet_user_path(current_user)
         %li= link_to t(:settings), settings_user_path(current_user)

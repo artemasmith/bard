@@ -19,3 +19,12 @@ ru:
   edit: 'Редактировать'
   wares: 'Товары'
   back: 'Назад'
+
+  tariff:
+    middle: 'mid'
+    large: 'lar'
+    free: 'fre'
+    cost: 'cost'
+    title: 'title'
+    change: 'change'
+

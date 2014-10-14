@@ -21,11 +21,12 @@ class Activity < ActiveRecord::Base
   protected
 
   def set_amounts
-    amount_credit = 0.0 if amount_debet.blank?
-    amount_debet = 0.0 if amount_debet.blank?
+    self.amount_credit ||= 0.0
+    self.amount_debet ||= 0.0
   end
+
   def set_balance
-    balance = self.user.balance
+    balance = self.user.balance || 0
     balance = balance + self.amount_debet - self.amount_credit
     self.user.update(balance: balance)
   end

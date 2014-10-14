@@ -1,16 +1,21 @@
 Bard::Application.routes.draw do
-  get "users/settings"
-  get "users/cabinet"
-  get "greetings/index"
-  get "greetings/about"
-  get "greetings/contact"
+
   resources :users, only: [:cabinet, :settings, :update] do
     member do
       get :cabinet
       get :settings
       get :stats
+      put :update_tariff
     end
     resources :shops
+    resources :payments, only: [:new, :create]
+  end
+  resource :greetings, only: [:index] do
+    collection do
+      get :about
+      get :contact
+    end
+    get :index
   end
 
   resources :shops do
@@ -20,11 +25,8 @@ Bard::Application.routes.draw do
   end
 
   resources :wares
-
   resources :barcodes
-
   devise_for :users
-  #devise_for :clients
 
   root 'greetings#index'
 

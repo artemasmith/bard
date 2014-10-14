@@ -1,13 +1,13 @@
-%h3= t('tariff.change')
-.row
-  .span2
-    .span6
-      =fields_for :tariff do |tariff|
-        %table.table.table-bordered
-          -Tariff.all.each do |t|
-            %tr
-              %th= t.title
-              %th= t.cost
-              %td
-                =radio_button_tag :tariff_selected, t.id, (current_user.tariff.id == t.id)
-
+%h3= t 'tariff.change'
+.tariff-errors
+  -if @msg.present?
+    =@msg
+= form_tag update_tariff_user_path(@user), method: :put do
+  %table.table.table-bordered
+    -Tariff.all.each do |t|
+      %tr
+        %th= t.title
+        %th= t.cost
+        %td
+          =radio_button_tag :tariff_id, t.id, t.id == current_user.tariff_id
+  = submit_tag t(:update), class: 'btn btn-primary btn-small'

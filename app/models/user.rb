@@ -45,14 +45,22 @@ class User < ActiveRecord::Base
   after_create :set_initial_tariff
 
   def get_name
-    name || email
+    self.name || self.email
   end
 
-  def update_tariff
-
+  def update_tariff(tariff_id)
+    tariff = Tariff.find(tariff_id)
+    if self.balance >= tariff.cost
+      self.update(tariff_id: tariff.id)
+      self.activities.create(amount_credit: tariff.cost)
+      return 'tariff changed'
+    else
+      self.errors.add(:tariff_id, 'not enough money for operation')
+      return 'not enough money'
+    end
   end
 
-  protected
+  private
 
   def set_initial_tariff
     self.update(tariff: Tariff.find_by_title('Free')) if self.tariff.blank?
