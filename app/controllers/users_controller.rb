@@ -2,8 +2,8 @@ class UsersController < ApplicationController
   before_action :authenticate_user!
 
   def settings
-    @tariff = current_user.tariff
-    @user = current_user
+    @user = User.find(current_user.id)
+    @tariff = @user.tariff
   end
 
   def cabinet

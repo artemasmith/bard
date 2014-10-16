@@ -1,13 +1,9 @@
 %h3= t('user.settings')
-- if @user.errors.present?
-  %ul
-    -@user.errors.messages.each do |m|
-      %li
-        = m
+=render 'layouts/errors', object: @user
 .row
   .span2
   .span6
-    = "Your balance is #{current_user.balance}"
+    = "Your balance is #{@user.balance}"
     = link_to 'pay some money', new_user_payment_path(current_user)
 = render 'users/form'
 = render 'users/tariff'

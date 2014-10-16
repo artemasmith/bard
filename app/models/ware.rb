@@ -14,7 +14,6 @@
 #
 
 class Ware < ActiveRecord::Base
-  resourcify
   has_many :characteristics
   belongs_to :category
   has_many :barcodes

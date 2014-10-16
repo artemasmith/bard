@@ -10,7 +10,6 @@
 #
 
 class Barcode < ActiveRecord::Base
-  resourcify
   validates :number, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :ware_id, numericality: true, presence: true
   belongs_to :ware

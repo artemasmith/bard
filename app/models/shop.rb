@@ -16,14 +16,12 @@
 #
 
 class Shop < ActiveRecord::Base
-  #TODO Fucking rolify! Delete users role field or vanish rolify from Gemfile!
-  resourcify
   belongs_to :user
   has_and_belongs_to_many :categories
   has_and_belongs_to_many :wares
 
   before_create :generate_token
-  validate :check_user_tariff
+  before_create :check_user_tariff
 
   def generate_token
     self.auth_token = Digest::MD5.hexdigest("#{self.user_id} - #{Time.now}")
@@ -31,7 +29,7 @@ class Shop < ActiveRecord::Base
   end
 
   def check_user_tariff
-    if self.user.tariff.shops_count == self.user.shops.count
+    if self.user.shops.count >= self.user.tariff.shops_count
       errors.add(:user_id, "Too many shops in this tariff")
     end
   end

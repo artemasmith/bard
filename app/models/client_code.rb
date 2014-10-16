@@ -10,7 +10,6 @@
 #
 
 class ClientCode < ActiveRecord::Base
-  resourcify
-  belongs_to :client
+  belongs_to :user
   belongs_to :barcode
 end

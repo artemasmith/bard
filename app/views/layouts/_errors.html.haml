@@ -1,0 +1,4 @@
+-object.errors.full_messages.each do |msg|
+  %div{ class: "alert alert-error"}
+    %a.close{ "data-dismiss" => "alert"} &#215;
+    =content_tag :div, msg

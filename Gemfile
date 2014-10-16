@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 4.0.0'
+gem 'rails', '~> 4.1.0'
 
 # Use sqlite3 as the database for Active Record
 #gem 'sqlite3'
@@ -9,7 +9,7 @@ gem 'rails', '~> 4.0.0'
 gem 'pg'
 gem 'devise'
 gem 'cancan'
-gem 'rolify'
+#gem 'rolify'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
@@ -20,7 +20,7 @@ gem 'nokogiri'
 gem 'nested_form'
 
 gem 'russian'
-#gem 'state_machine'
+gem 'state_machine'
 
 gem 'annotate'
 # Use SCSS for stylesheets

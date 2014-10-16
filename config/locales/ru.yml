@@ -19,6 +19,15 @@ ru:
   edit: 'Редактировать'
   wares: 'Товары'
   back: 'Назад'
+  update: 'Update'
+
+  unauthorized:
+    default: "Default error message text."
+    manage:
+      all: "Not authorized to %{action} %{subject}."
+      user: "Not allowed to manage other user accounts."
+    update:
+      project: "Not allowed to update this project."
 
   tariff:
     middle: 'mid'
