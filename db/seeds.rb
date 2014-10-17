@@ -89,3 +89,5 @@ end
 ].each do |tariff|
   Tariff.find_or_create_by tariff
 end
+
+User.create(email: 'artemasmith@gmail.com', password: '12345678', role: :admin)
