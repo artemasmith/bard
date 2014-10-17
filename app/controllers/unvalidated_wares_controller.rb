@@ -1,7 +1,7 @@
 class UnvalidatedWaresController < ApplicationController
   before_action :set_uware, except: [:index, :create, :new]
-  before_action :new_uware, only: :create
-  load_and_authorize_resource
+
+  load_and_authorize_resource :except => :create
   before_action :authenticate_user!
 
   def index
@@ -19,6 +19,8 @@ class UnvalidatedWaresController < ApplicationController
   end
 
   def create
+    @uware = UnvalidatedWare.new(uware_params)
+    authorize! :create, @uware
     if @uware.save
       respond_to do |format|
         format.html { redirect_to user_unvalidated_ware_path(user_id: current_user.id, id: @uware.id) }
@@ -41,21 +43,18 @@ class UnvalidatedWaresController < ApplicationController
   def destroy
     @uware.destroy
     respond_to do |format|
-      format.html { redirect_to user_shops_path(current_user) }
+      format.html { redirect_to user_unvalidated_ware_path(current_user) }
     end
   end
 
   protected
 
   def uware_params
-    params.require(:unvalidated_ware).permit(:barcode, :comment, :user_id)
+    params.require(:unvalidated_ware).permit(:barcode, :title, :comment, :user_id)
   end
 
   def set_uware
     @uware = UnvalidatedWare.find(params[:id])
   end
 
-  def new_uware
-    @uware = UnvalidatedWare.new(shop_params)
-  end
 end

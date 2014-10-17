@@ -8,7 +8,7 @@ gem 'rails', '~> 4.1.0'
 
 gem 'pg'
 gem 'devise'
-gem 'cancan'
+gem 'cancancan'
 #gem 'rolify'
 gem 'activeadmin', github: 'gregbell/active_admin'
 gem 'therubyracer'
@@ -20,7 +20,6 @@ gem 'nokogiri'
 gem 'nested_form'
 
 gem 'russian'
-gem 'state_machine'
 
 gem 'annotate'
 # Use SCSS for stylesheets

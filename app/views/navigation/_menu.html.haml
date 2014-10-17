@@ -7,7 +7,7 @@
       -if current_user
         %li= link_to t(:cabinet), cabinet_user_path(current_user)
         %li= link_to t(:settings), settings_user_path(current_user)
-        %li= link_to t(:shops), shops_path()
+        %li= link_to t(:shops), user_shops_path(current_user)
         %li.divider
           .span5
             = t :you_login_as

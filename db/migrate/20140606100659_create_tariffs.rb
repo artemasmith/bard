@@ -8,7 +8,5 @@ class CreateTariffs < ActiveRecord::Migration
 
       t.timestamps
     end
-    change_column :activities, :amount_debet, :decimal, default: 0.0
-    change_column :activities, :amount_credit, :decimal, default: 0.0
   end
 end

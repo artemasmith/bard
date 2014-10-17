@@ -11,7 +11,8 @@ class Ability
       can [:new, :create], Shop do |shop|
         user.shops.count < user.tariff.shops_count
       end
-      can :manage, UnvalidatedWare, user_id: user.id
+      can [:update, :edit, :destroy], UnvalidatedWare, user_id: user.id
+      can [:new, :create], UnvalidatedWare
       can :manage, ClientCode, user_id: user.id
       #can :update, Client, id: user.id
     else

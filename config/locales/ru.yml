@@ -20,6 +20,7 @@ ru:
   wares: 'Товары'
   back: 'Назад'
   update: 'Update'
+  create: 'Create'
 
   unauthorized:
     default: "Default error message text."

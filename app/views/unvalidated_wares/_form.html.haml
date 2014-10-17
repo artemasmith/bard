@@ -1,0 +1,18 @@
+= form_for [current_user, uware] do |f|
+  = f.hidden_field :user_id, value: current_user.id
+  .row
+    .table.table-bordered
+      .tr
+        .td= t "unvalidated_ware.title"
+        .td
+          = f.text_field :title, class: 'form-control'
+      .tr
+        .td= t "unvalidated_ware.barcode"
+        .td
+          = f.text_field :barcode, class: 'form-control'
+      .tr
+        .td= t "unvalidated_ware.comment"
+        .td
+          = f.text_area :comment, class: 'form-control'
+  .row
+    =f.submit t(:create), class: 'btn btn-primary btn-large'

@@ -7,6 +7,7 @@ class CreateWares < ActiveRecord::Migration
       t.integer :category_id
       t.integer :ware_type
       t.integer :id_ext
+      t.integer :state, default: 0
 
       t.timestamps
     end

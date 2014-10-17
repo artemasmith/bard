@@ -4,19 +4,20 @@
 #
 #  id         :integer          not null, primary key
 #  barcode    :string(255)
-#  comment    :string(255)
+#  title      :string(255)
+#  comment    :text
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  title      :string(255)
 #
 
 class UnvalidatedWare < ActiveRecord::Base
   belongs_to :user
-  validate :barcode, presence: true
-  validate :comment, presence: true
+  validates :barcode, :comment, :title, presence: true
 
-  def validate
-
+  #do I need this validation method?????
+  def validate_ware
+    barcode = Barcode.find_by_number(self.barcode)
+    Ware.create(title: self.title, spec: self.comment)
   end
 end

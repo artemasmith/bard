@@ -14,12 +14,12 @@
           %td= shop.address
           %td
             .span2
-              = link_to t(:show), shop_path(shop), class: 'btn'
+              = link_to t(:show), user_shop_path(current_user, shop), class: 'btn btn-small'
             .span2
-              = link_to t(:edit), edit_shop_path(shop), class: 'btn'
+              = link_to t(:edit), edit_user_shop_path(current_user, shop), class: 'btn btn-small'
             .span2
-              = link_to t(:delete),shop_path(shop), method: :delete, class: 'btn btn-danger'
+              = link_to t(:delete), user_shop_path(current_user, shop), method: :delete, class: 'btn btn-danger btn-small'
 .row
-  =link_to t(:create), new_shop_path, class: 'btn'
+  =link_to t(:create), new_user_shop_path(current_user), class: 'btn'
 
 

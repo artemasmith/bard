@@ -9,6 +9,7 @@
 #  category_id :integer
 #  ware_type   :integer
 #  id_ext      :integer
+#  state       :integer
 #  created_at  :datetime
 #  updated_at  :datetime
 #
@@ -20,7 +21,10 @@ class Ware < ActiveRecord::Base
   #has_and_belongs_to_many :users
   has_and_belongs_to_many :shops
 
-  before_save :generate_ext_id
+  before_save :generate_ext_id, :set_state
+
+
+  enum state: [:created, :published, :moderated, :archived]
 
   def to_xml_node document
     node = Nokogiri::XML::Node.new 'ware', document
@@ -34,5 +38,9 @@ class Ware < ActiveRecord::Base
 
   def generate_ext_id
     id_ext = Digest::MD5.hexdigest "Time.now + #{title}"
+  end
+
+  def set_state
+    self.state ||= :created
   end
 end

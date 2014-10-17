@@ -20,7 +20,8 @@
 #  tariff_id              :integer
 #  created_at             :datetime
 #  updated_at             :datetime
-#  balance                :decimal(, )
+#  balance                :decimal(, )      default(0.0)
+#  role                   :integer          default(2)
 #
 
 require 'spec_helper'

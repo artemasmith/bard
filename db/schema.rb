@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141016115328) do
+ActiveRecord::Schema.define(version: 20140703050059) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -90,17 +90,6 @@ ActiveRecord::Schema.define(version: 20141016115328) do
     t.datetime "updated_at"
   end
 
-  create_table "roles", force: true do |t|
-    t.string   "name"
-    t.integer  "resource_id"
-    t.string   "resource_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
-
   create_table "shops", force: true do |t|
     t.string   "ip"
     t.integer  "out_id"
@@ -132,11 +121,11 @@ ActiveRecord::Schema.define(version: 20141016115328) do
 
   create_table "unvalidated_wares", force: true do |t|
     t.string   "barcode"
-    t.string   "comment"
+    t.string   "title"
+    t.text     "comment"
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "title"
   end
 
   create_table "user_codes", force: true do |t|
@@ -160,21 +149,14 @@ ActiveRecord::Schema.define(version: 20141016115328) do
     t.string   "login"
     t.text     "specs"
     t.integer  "tariff_id"
+    t.integer  "role",                   default: 2
     t.datetime "created_at"
     t.datetime "updated_at"
     t.decimal  "balance",                default: 0.0
-    t.integer  "role",                   default: 2
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-
-  create_table "users_roles", id: false, force: true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
-  end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   create_table "users_wares", force: true do |t|
     t.integer "user_id"
@@ -196,6 +178,7 @@ ActiveRecord::Schema.define(version: 20141016115328) do
     t.integer  "category_id"
     t.integer  "ware_type"
     t.integer  "id_ext"
+    t.integer  "state",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end

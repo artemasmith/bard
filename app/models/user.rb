@@ -20,7 +20,8 @@
 #  tariff_id              :integer
 #  created_at             :datetime
 #  updated_at             :datetime
-#  balance                :decimal(, )
+#  balance                :decimal(, )      default(0.0)
+#  role                   :integer          default(2)
 #
 
 class User < ActiveRecord::Base
@@ -44,9 +45,9 @@ class User < ActiveRecord::Base
   before_save :set_default_role
   after_create :set_initial_tariff
 
-  ROLES = [:admin, :manager, :client]
+  #ROLES = [:admin, :manager, :client]
 
-  enum role: ROLES
+  enum role: [:admin, :manager, :client]
 
 
   def get_name

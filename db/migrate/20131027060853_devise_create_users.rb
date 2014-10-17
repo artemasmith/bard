@@ -36,6 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :login
       t.text :specs
       t.integer :tariff_id
+      t.integer :role, default: 2
 
 
       t.timestamps

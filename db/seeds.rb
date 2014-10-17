@@ -79,14 +79,6 @@ end
   Barcode.find_or_create_by(barcode)
 end
 
-#ROLES
-[
-    { name: 'admin' },
-    { name: 'client' }
-].each do |role|
-  Role.find_or_create_by(role)
-end
-
 #TARIFFS
 
 [

@@ -9,6 +9,7 @@
 #  category_id :integer
 #  ware_type   :integer
 #  id_ext      :integer
+#  state       :integer
 #  created_at  :datetime
 #  updated_at  :datetime
 #

@@ -4,11 +4,11 @@
 #
 #  id         :integer          not null, primary key
 #  barcode    :string(255)
-#  comment    :string(255)
+#  title      :string(255)
+#  comment    :text
 #  user_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
-#  title      :string(255)
 #
 
 require 'spec_helper'
@@ -25,17 +25,17 @@ describe UnvalidatedWare do
 
     it 'validates should create real ware' do
       bc = uware1.barcode
-      uware1.validate.should change{ Ware.count }.by(1)
+      uware1.validate_ware.should change{ Ware.count }.by(1)
       Ware.last.barcodes.map{ |b| b.number.to_s }.should include(bc)
     end
 
     it 'validates should delete self from uwares' do
-      uware2.validate.should change{ UnvalidatedWare.count }.by(-1)
+      uware2.validate_ware.should change{ UnvalidatedWare.count }.by(-1)
     end
 
     it 'validates should create barcode if new' do
       bc = uware1.barcode
-      uware3.validate.should change{ Barcode.count }.by(1)
+      uware3.validate_ware.should change{ Barcode.count }.by(1)
       Barcode.find_by_number(bc).should_not be_blank
     end
 

@@ -1,19 +1,5 @@
 Bard::Application.routes.draw do
 
-  get 'unvalidated_wares/index'
-
-  get 'unvalidated_wares/show'
-
-  get 'unvalidated_wares/new'
-
-  get 'unvalidated_wares/edit'
-
-  get 'unvalidated_wares/create'
-
-  get 'unvalidated_wares/update'
-
-  get 'unvalidated_wares/destroy'
-
   resources :users, only: [:cabinet, :settings, :update] do
     member do
       get :cabinet
@@ -21,10 +7,15 @@ Bard::Application.routes.draw do
       get :stats
       put :update_tariff
     end
-    resources :shops
+    resources :shops do
+      member do
+        get :wares
+      end
+    end
     resources :payments, only: [:new, :create]
     resources :unvalidated_wares, path: :uwares
   end
+
   resource :greetings, only: [:index] do
     collection do
       get :about
@@ -33,11 +24,11 @@ Bard::Application.routes.draw do
     get :index
   end
 
-  resources :shops do
-    member do
-      get :wares
-    end
-  end
+  #resources :shops do
+  #  member do
+  #    get :wares
+  #  end
+  #end
 
   resources :wares
   resources :barcodes
