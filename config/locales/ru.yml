@@ -1,5 +1,5 @@
 ru:
-  welcome: "Hello world"
+  welcome: "Добро пожаловать!"
   main_page: 'Главная'
   about: 'О нас'
   contact_us: 'Напишите нам'
@@ -19,22 +19,75 @@ ru:
   edit: 'Редактировать'
   wares: 'Товары'
   back: 'Назад'
-  update: 'Update'
-  create: 'Create'
+  update: 'Обновить'
+  create: 'Создать'
+
+
+  models:
+    shop: 'Магазин'
+    category: 'Категория'
+    ware: 'Товар'
+    tariff: 'Тариф'
+    user: 'Пользователь'
+    value: 'Значение'
+    property: 'Свойство'
+    barcode: 'Штрихкод'
+    characteristic: 'Характеристика'
+    activity: 'Платежки'
+    unvalidated_ware: 'Неутвержденный товар'
 
   unauthorized:
-    default: "Default error message text."
+    default: "Ошибка авторизации"
     manage:
-      all: "Not authorized to %{action} %{subject}."
-      user: "Not allowed to manage other user accounts."
+      all: "Вы не авторизованы на %{action} %{subject}."
+      user: "Вы не можете изменять другие аккаунты"
+      shop: 'Вы не можете изменять магазины'
+      ware: 'Вы не можете изменять утвержденые товары'
+      unvalidated_ware: 'Вы не можете изменять товары'
     update:
-      project: "Not allowed to update this project."
+      shop: "Вы не можете изменять атрибуты магазина"
+
 
   tariff:
-    middle: 'mid'
-    large: 'lar'
-    free: 'fre'
-    cost: 'cost'
-    title: 'title'
-    change: 'change'
-
+    tariff: 'тариф'
+    little: 'Минимальный'
+    middle: 'Оптимальный'
+    large: 'Крупный'
+    free: 'Бесплатный'
+    cost: 'Стоимость'
+    title: 'Название'
+    change: 'Изменить'
+  shop:
+    title: 'Название'
+    ip: 'IP адрес'
+  ware:
+    category: 'Категория'
+  unvalidated_ware:
+    index: 'Неутвержденный товар'
+    create: 'Новый товар'
+    title: 'Название'
+    comment: 'Описание'
+    barcode: 'Штрихкод'
+  category:
+    title: 'Название'
+    id_ext: 'Внешний ID'
+  barcode:
+    number: 'Номер'
+  activity:
+    amount_debet: 'Приход'
+    amount_credit: 'Уход'
+  characteristic:
+    value: 'Значение'
+  user:
+    specs: 'Спецификация'
+    login: 'Логин'
+    name: 'Имя'
+    password: 'Пароль'
+    password_confirmation: 'Подтвердите пароль'
+    email: 'Эл. почта'
+    user_type: 'Тип пользователя'
+    role: 'Роль'
+    sign_up: 'Регистрация'
+    sign_in: 'Войти'
+    settings: 'Настройки'
+    cabinet: 'Личный кабинет'

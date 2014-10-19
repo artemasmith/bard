@@ -91,3 +91,5 @@ end
 end
 
 User.create(email: 'artemasmith@gmail.com', password: '12345678', role: :admin)
+nik = User.create(email: 'nikita@ples.ru', password: '12345678', role: :admin)
+nik.activities.create(amount_debet: 100000)

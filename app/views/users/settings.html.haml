@@ -3,7 +3,7 @@
 .row
   .span2
   .span6
-    = "Your balance is #{@user.balance}"
-    = link_to 'pay some money', new_user_payment_path(current_user)
+    = "Ваш баланс #{@user.balance}"
+    = link_to 'Поплнить баланс', new_user_payment_path(current_user)
 = render 'users/form'
 = render 'users/tariff'

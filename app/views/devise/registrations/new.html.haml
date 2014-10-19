@@ -1,21 +1,21 @@
-%h2 Sign up
+%h2= t('user.sign_up')
 
 = nested_form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f|
   = devise_error_messages!
 
-  %div= f.label :email
+  %div= f.label t("user.email")
   %br
-    = f.email_field :email, :autofocus => true
+    = f.email_field :email, :autofocus => true, class: 'form-control'
 
-  %div= f.label :password
+  %div= f.label t("user.password")
   %br
-    = f.password_field :password
+    = f.password_field :password, class: 'form-control'
 
-  %div= f.label :password_confirmation
+  %div= f.label t("user.password_confirmation")
   %br
-    = f.password_field :password_confirmation
+    = f.password_field :password_confirmation, class: 'form-control'
 
 
-  %div= f.submit "Sign up"
+  %div= f.submit t("user.sign_up"), class: 'btn btn-primary'
 
 = render "devise/shared/links"

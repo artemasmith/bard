@@ -4,15 +4,15 @@
     .table.table-bordered
       .tr
         .td= t "unvalidated_ware.title"
-        .td
+        .td.form-group
           = f.text_field :title, class: 'form-control'
       .tr
         .td= t "unvalidated_ware.barcode"
-        .td
+        .td.form-group
           = f.text_field :barcode, class: 'form-control'
       .tr
         .td= t "unvalidated_ware.comment"
-        .td
+        .td.form-group
           = f.text_area :comment, class: 'form-control'
   .row
     =f.submit t(:create), class: 'btn btn-primary btn-large'

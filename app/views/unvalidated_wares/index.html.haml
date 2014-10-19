@@ -3,9 +3,9 @@
   .span9
     %table.table.table-bordered
       %tr
-        %th= t(:title)
-        %th= t(:barcode)
-        %th= t(:comment)
+        %th= t("unvalidated_ware.title")
+        %th= t("unvalidated_ware.barcode")
+        %th= t("unvalidated_ware.comment")
         %td
       - @uwares.each do |uware|
         %tr

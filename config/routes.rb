@@ -1,5 +1,11 @@
 Bard::Application.routes.draw do
 
+  get 'payments/new'
+
+  get 'payments/index'
+
+  get 'payments/show'
+
   resources :users, only: [:cabinet, :settings, :update] do
     member do
       get :cabinet
