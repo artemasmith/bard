@@ -1,117 +1,70 @@
 class Api::V1::BarcodesController < ApplicationController
+  respond_to :json
+  before_action :restrict_access
 
-  before_action :authenticate_client
-
+  #send to client all his wares
   def index
-    #params[:page] - respond for pagination
-    xml = Nokogiri::XML ''
-    body = Nokogiri::XML::Node.new 'body', xml
-    barcodes = Nokogiri::XML::Node.new 'barcodes', xml
-    wares = Nokogiri::XML::Node.new 'wares', xml
-
-    #Temporaly send all barcodes ??
-    @shop.categories.each do |cat|
-      cat.wares.each do |ware|
-        wares.add_child ware.to_xml_node xml
-        ware.barcodes.each { |barcode| barcodes.add_child barcode.to_xml_node xml }
-      end
-    end
-
-    xml.add_child body
-    body.add_child barcodes
-    body.add_child wares
-
-    render xml: xml, status: 200
+    #@shop.wares.all.to_json
+    render json: @shop.wares.all.to_json, status: 200
   end
 
   def show
-    xml = Nokogiri::XML ''
-    body = Nokogiri::XML::Node.new 'body', xml
-    barcodes = Nokogiri::XML::Node.new 'barcodes', xml
-    # groups = Nokogiri::XML::Node.new 'groups', xml
-    characteristics = Nokogiri::XML::Node.new 'characteristics', xml
-    categories = Nokogiri::XML::Node.new 'categories', xml
-    properties = Nokogiri::XML::Node.new 'properties', xml
-    values = Nokogiri::XML::Node.new 'values', xml
-    wares = Nokogiri::XML::Node.new 'wares', xml
-    errors = Nokogiri::XML::Node.new 'errors', xml
-
-    numbers = params[:number].split(',')
-    numbers.each do |n|
-      b = Barcode.find_by_number(n)
-      if b
-        barcode = Nokogiri::XML::Node.new 'barcode', xml
-        barcode[:number] = b.number
-        barcode[:id_ware] = b.ware_id
-        barcode[:id_char] = b.ware.characteristics.last.id if !b.ware.characteristics.blank?
-        barcodes.add_child(barcode)
-
-        #characteristics
-        b.ware.characteristics.each do |chr|
-          character = Nokogiri::XML::Node.new 'characteristic', xml
-          character[:id_ware] = chr.ware_id
-          character[:id_prop] = chr.property_id
-          character[:id_val] = chr.value_id
-          character[:id_ext] = chr.id_ext
-          characteristics.add_child(character)
-
-          value = Nokogiri::XML::Node.new 'value', xml
-          value[:val] = chr.value.content
-          value[:id_ext] = chr.value.id_ext
-          values.add_child(value)
-
-          property = Nokogiri::XML::Node.new 'property', xml
-          property[:title] = chr.property.title
-          property[:id_ext] = chr.property.id_ext
-          properties.add_child(property)
-
-          category = Nokogiri::XML::Node.new 'category', xml
-          category[:title] = b.ware.category.title
-          category[:id_ext] = b.ware.category.id_ext
-          categories.add_child(category)
-
+    result = { 'unrecognized_wares' => [], 'characteristics' => [], 'wares' => [], 'properties' => [], 'categories' =>
+    [], 'values' => [] }
+    barcodes = params['barcodes'].split(',')
+    barcodes.each do |b|
+      tb = Barcode.find_by_number(b)
+      ware = tb.try :ware
+      if tb.present? && ware.present?
+        if ware.characteristics.present?
+          ware.characteristics.each do |c|
+            temp1 = JSON(c.to_json)
+            temp1['ware_id'] = ware.id
+            result['characteristics'] << temp1
+          end
         end
-
+        temp = JSON(ware.to_json)
+        temp['barcode'] = tb.number
+        result['wares'] << temp
       else
-        #@clients.unvalidated_wares.create()
-        barcode = Nokogiri::XML::Node.new 'error', xml
-        barcode.content = "Can't find barcode with given number"
-        errors.add_child(barcode)
+        result['unrecognized_wares'] << b.to_json
       end
-
     end
-    xml.add_child(body)
-    xml.children.first.add_child(barcodes)
-    # xml.children.first.add_child(groups)
-    xml.children.first.add_child(characteristics)
-    xml.children.first.add_child(categories)
-    xml.children.first.add_child(properties)
-    xml.children.first.add_child(values)
-    xml.children.first.add_child(wares)
-    xml.children.first.add_child(errors)
-
-    if errors.children.blank?
-      render xml: xml, status: 200
-    else
-      render xml: xml, status: 400
-    end
+    Property.all.each { |p| result['properties'] << JSON(p.to_json) }
+    Category.all.each { |c| result['categories'] << JSON(c.to_json) }
+    Value.all.each { |v| result['values'] << JSON(v.to_json) }
+    render json: result.to_json
   end
 
   def create
 
   end
 
-  protected
+  private
 
-  def authenticate_client
-    @client = Client.find_by_login(params[:login])
-    if @client.blank?
-      render xml: Client.render_error('wrong login'), status: 401
+  def restrict_access
+    if params[:login].blank? || params[:auth_token].blank?
+      #head :unauthorized, error_message: "wrong request, no login or auth token provided"
+      render json: { error_message: 'wrong request, no login or auth token provided' }, status: 401 if params[:login].blank? || params[:auth_token].blank?
       return
     end
-    @shop = @client.shops.where(auth_token: params[:auth_token])[0]
+    @client = User.find_by_login(params[:login])
+    if @client.blank?
+      #head :unauthorized, error_message: "no such client - wrong login"
+      render json: { error_message: 'wrong login' }, status: 401 if @client.blank?
+      return
+    end
+    @shop = @client.shops.where("ip = ? OR auth_token = ?", request.remote_ip, params[:auth_token]).first
+    @shop = nil if @shop.present? && @shop.auth_token != params[:auth_token]
+
     if @shop.blank?
-      render xml: Client.render_error('wrong auth_token'), status: 401
+      render json: { error_message: 'there is no shop indetified by this token or ip' } if @shop.blank?
+      return
+    end
+    token = @shop.get_token
+    if token.length != 32
+      #head :unauthorized, error_message: "#{token}"
+      render json: { error_message: "#{token}" } if token.length != 32
       return
     end
   end

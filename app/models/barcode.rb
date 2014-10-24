@@ -13,7 +13,7 @@ class Barcode < ActiveRecord::Base
   validates :number, presence: true, uniqueness: true, length: { maximum: 50 }
   validates :ware_id, numericality: true, presence: true
   belongs_to :ware
-  has_many :client_code
+
 
   def to_xml_node document
   	bcode = Nokogiri::XML::Node.new 'barcode', document

@@ -23,6 +23,25 @@ class Shop < ActiveRecord::Base
   before_create :generate_token
   before_create :check_user_tariff
 
+  #TODO: save in log file info about auth_token expiration
+  #after_update :observe_to_log
+
+  enum state: [:normal, :disabled]
+
+  def get_token
+    if self.normal?
+      if Date.today > self.token_expire
+        self.generate_token
+        self.save
+        return :token_expire
+      else
+        return self.auth_token
+      end
+    else
+      return :shop_disabled
+    end
+  end
+
   def generate_token
     self.auth_token = Digest::MD5.hexdigest("#{self.user_id} - #{Time.now}")
     self.token_expire = Date.today + 1.year

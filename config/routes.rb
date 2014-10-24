@@ -42,7 +42,7 @@ Bard::Application.routes.draw do
 
   root 'greetings#index'
 
-  namespace :api, defaults: { format: :xml } do
+  namespace :api, defaults: { format: :json } do
     scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
       match '/barcode' => 'barcodes#show', via: :get, as: :show_barcode_api
       match '/barcode' => 'barcodes#create', via: :post, as: :create_barcode_api

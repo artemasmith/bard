@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140703050059) do
+ActiveRecord::Schema.define(version: 20141022110255) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20140703050059) do
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "state",        default: 0
   end
 
   add_index "shops", ["auth_token"], name: "index_shops_on_auth_token", using: :btree
