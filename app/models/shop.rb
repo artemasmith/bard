@@ -42,6 +42,62 @@ class Shop < ActiveRecord::Base
     end
   end
 
+  def add_ware ware_id
+    ware = Ware.find(ware_id.to_i)
+    if self.wares.include?(ware)
+      return 'ware are already in list'
+    else
+      self.wares << ware
+    end
+  end
+
+  #wares - string of barcodes or ALL string
+  def get_wares wares
+    result = { 'unrecognized_wares' => [], 'characteristics' => [], 'wares' => [], 'properties' => [], 'categories' =>
+        [], 'values' => [] }
+#TODO Refactor this!!!!!!!!
+    if wares == 'ALL'
+      self.wares.each do |ware|
+        temp = JSON(ware.to_json)
+        temp['barcode'] = (ware.barcodes.present?) ? ware.barcodes.last.number : 'unknown barcode or group'
+        result['wares'] << temp
+        if ware.characteristics.present?
+          ware.characteristics.each do |c|
+            temp1 = JSON(c.to_json)
+            temp1['ware_id'] = ware.id
+            result['characteristics'] << temp1
+          end
+        end
+      end
+    else
+      wares.split(',').each do |b|
+        tb = Barcode.find_by_number(b)
+        ware = tb.try :ware
+        if tb.present? && ware.present?
+          if ware.characteristics.present?
+            ware.characteristics.each do |c|
+              temp1 = JSON(c.to_json)
+              temp1['ware_id'] = ware.id
+              result['characteristics'] << temp1
+            end
+          end
+          temp = JSON(ware.to_json)
+          temp['barcode'] = tb.number
+          result['wares'] << temp
+          #### HERE We've got a nice piece of shit code, Honestly we should use observer but it would be very complicated.
+          self.add_ware ware.id
+        else
+          result['unrecognized_wares'] << b.to_json
+        end
+      end
+    end
+
+    Property.all.each { |p| result['properties'] << JSON(p.to_json) }
+    Category.all.each { |c| result['categories'] << JSON(c.to_json) }
+    Value.all.each { |v| result['values'] << JSON(v.to_json) }
+    result
+  end
+
   def generate_token
     self.auth_token = Digest::MD5.hexdigest("#{self.user_id} - #{Time.now}")
     self.token_expire = Date.today + 1.year

@@ -20,6 +20,8 @@ class Ware < ActiveRecord::Base
   has_many :barcodes
   #has_and_belongs_to_many :users
   has_and_belongs_to_many :shops
+  belongs_to :parent, class_name: 'Ware', foreign_key: :parent_id
+  has_many :children, class_name: 'Ware', foreign_key: :parent_id
 
   before_save :generate_ext_id, :set_state
 

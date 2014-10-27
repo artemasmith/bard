@@ -7,10 +7,11 @@ describe 'Barcodes api' do
     tariff = FactoryGirl.create(:tariff, shops_count: 2)
     @client.update(tariff_id: tariff.id)
     @client.shops.create()
-    @auth_token = @client.shops.last.auth_token
+    @shop = @client.shops.last
+    @auth_token = @shop.auth_token
     category = FactoryGirl.create(:category)
     ware = FactoryGirl.create(:ware, category_id: category.id)
-    @client.shops.last.wares << ware
+    #@client.shops.last.wares << ware
     FactoryGirl.create(:barcode, ware_id: ware.id, number: '123456') until Barcode.find_by_number('123456')
     v = FactoryGirl.create(:value)
     p = FactoryGirl.create(:property)
@@ -111,12 +112,30 @@ describe 'Barcodes api' do
       expect(JSON(response.body)['unrecognized_wares'].count).to be > 0
     end
 
-    it 'get request should inc counters of users wares' do
-
+    it 'get request should inc counters of shop wares' do
+      w = FactoryGirl.create(:ware, title: 'New cool watermellon')
+      FactoryGirl.create(:barcode, number: '341256', ware_id: w.id)
+      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '341256' }
+      expect(@shop.wares).to include(w)
     end
 
-    it 'should return all shop wares on demand(restore request)' do
-
+    describe 'return all shop wares if we lost data on client side' do
+      before do
+        w1 = FactoryGirl.create(:ware, title: 'orange')
+        @shop.wares << w1
+        w2 = FactoryGirl.create(:ware, title: 'banana')
+        @shop.wares << w2
+        w3 = FactoryGirl.create(:ware, title: 'lemon')
+        @shop.wares << w3
+        FactoryGirl.create(:barcode, ware_id: w1.id, number: '11112')
+        FactoryGirl.create(:barcode, ware_id: w2.id, number: '123112')
+        FactoryGirl.create(:barcode, ware_id: w3.id, number: '11134232')
+      end
+      it 'should return all shop wares on demand(restore request)' do
+        get '/api/barcodes', { login: @client.login, auth_token: @auth_token }
+        puts(response.body)
+        expect(JSON(response.body)['wares'].count).to be >= 3
+      end
     end
 
   end
