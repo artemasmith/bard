@@ -4,7 +4,7 @@ class CreateUnvalidatedWares < ActiveRecord::Migration
       t.string :barcode
       t.string :title
       t.text :comment
-      t.integer :user_id
+      t.integer :shop_id
 
       t.timestamps
     end

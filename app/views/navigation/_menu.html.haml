@@ -8,7 +8,7 @@
         %li= link_to t(:cabinet), cabinet_user_path(current_user)
         %li= link_to t(:settings), settings_user_path(current_user)
         %li= link_to t(:shops), user_shops_path(current_user)
-        %li= link_to "Мои товары", user_unvalidated_wares_path(current_user)
+        /%li= link_to "Мои товары", user_unvalidated_wares_path(current_user)
         %li.divider
           .span4
           %li= link_to t(:you_login_as) + " " +  current_user.get_name, "#"

@@ -37,8 +37,6 @@ class User < ActiveRecord::Base
   #has_and_belongs_to_many :wares
   has_and_belongs_to_many :categories
 
-  has_many :unvalidated_wares, through: :shops
-
   has_many :activities
   belongs_to :tariff
 

@@ -19,7 +19,7 @@ Bard::Application.routes.draw do
       end
     end
     resources :payments, only: [:new, :create]
-    resources :unvalidated_wares, path: :uwares
+    #resources :unvalidated_wares, path: :uwares
   end
 
   resource :greetings, only: [:index] do
