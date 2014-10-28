@@ -21,29 +21,29 @@ describe 'Barcodes api' do
   describe 'wrong authentication' do
 
     it 'no login' do
-      get '/api/barcode', { login: @client.login, number: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcode', { login: @client.login, number: '123456' }
       expect(response.body).to include('no login or auth token')
     end
 
     it 'incorrect user login' do
-      get '/api/barcode', {login: 'unreal_user', auth_token: @auth_token, barcodes: '123456'}, { "Accept" => "application/json" }
+      get '/api/barcode', {login: 'unreal_user', auth_token: @auth_token, barcodes: '123456'}
       expect(response.body).to include('wrong login')
     end
 
     it 'incorrect auth token or ip - no shop' do
-      get '/api/barcode', {login: @client.login, auth_token: '12345678901234567890123456789012', barcodes: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcode', {login: @client.login, auth_token: '12345678901234567890123456789012', barcodes: '123456' }
       expect(response.body).to include('no shop')
     end
 
     it 'token expired' do
       @client.shops.last.update(token_expire: Date.yesterday)
-      get '/api/barcode', {login: @client.login, auth_token: @auth_token, barcodes: '123456'}, { "Accept" => "application/json" }
+      get '/api/barcode', {login: @client.login, auth_token: @auth_token, barcodes: '123456'}
       expect(JSON(response.body)['error_message']).to eq('token_expire')
     end
 
     it 'shop disabled' do
       @client.shops.last.disabled!
-      get '/api/barcode',{login: @client.login, auth_token: @auth_token, barcodes: '123456'}, { "Accept" => "application/json" }
+      get '/api/barcode',{login: @client.login, auth_token: @auth_token, barcodes: '123456'}
       expect(response.body).to include('shop_disabled')
       @client.shops.last.normal!
     end
@@ -57,12 +57,12 @@ describe 'Barcodes api' do
     end
 
     it 'should get barcodes' do
-      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }
       expect(response.status).to eq 200
     end
 
     it 'should contain barcodes in json' do
-      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }
       json = JSON(response.body)
       expect(json.count).to be > 0
     end
@@ -74,13 +74,13 @@ describe 'Barcodes api' do
     end
 
     it 'should contain properties ' do
-      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }
       json = JSON(response.body)
       expect(json['properties'].count).to be > 0
     end
 
     it 'should contain values ' do
-      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcode', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }
       json = JSON(response.body)
       expect(json['values'].count).to be > 0
     end
@@ -90,7 +90,7 @@ describe 'Barcodes api' do
   context 'success get of wares' do
 
     it 'index action works fine' do
-      get '/api/barcodes', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }, { "Accept" => "application/json" }
+      get '/api/barcodes', { login: @client.login, auth_token: @auth_token, barcodes: '123456' }
       expect(response.status).to eq 200
     end
 
@@ -133,7 +133,6 @@ describe 'Barcodes api' do
       end
       it 'should return all shop wares on demand(restore request)' do
         get '/api/barcodes', { login: @client.login, auth_token: @auth_token }
-        puts(response.body)
         expect(JSON(response.body)['wares'].count).to be >= 3
       end
     end
@@ -141,9 +140,15 @@ describe 'Barcodes api' do
   end
 
   describe 'unvalidated wares request from client ' do
-    it 'should create unvalidated wares' do
-
+    before do
+      @json = { uwares: [{ barcode: '99922233', title: 'Pineapple', comment: 'Juicy and bounce' },
+                        { barcode: '888999333', title: 'Strawberry', comment: '' }] }
     end
+    it 'should create unvalidated wares' do
+      post '/api/barcode', { login: @client.login, auth_token: @auth_token, wares: @json.to_json }
+      UnvalidatedWare.all.count.should be >= 2
+    end
+
   end
 
 

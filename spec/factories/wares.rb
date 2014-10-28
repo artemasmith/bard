@@ -9,7 +9,7 @@
 #  category_id :integer
 #  ware_type   :integer
 #  id_ext      :integer
-#  state       :integer
+#  state       :integer          default(0)
 #  created_at  :datetime
 #  updated_at  :datetime
 #

@@ -6,7 +6,7 @@
 #  barcode    :string(255)
 #  title      :string(255)
 #  comment    :text
-#  user_id    :integer
+#  shop_id    :integer
 #  created_at :datetime
 #  updated_at :datetime
 #

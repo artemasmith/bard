@@ -21,7 +21,6 @@ gem 'nested_form'
 
 gem 'russian'
 
-gem 'annotate'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
 
