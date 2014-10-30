@@ -90,8 +90,8 @@ end
   Tariff.find_or_create_by tariff
 end
 
-User.create(email: 'artemasmith@gmail.com', password: '12345678', role: :admin)
-nik = User.new(email: 'nikita@ples.ru', password: '12345678', role: :admin)
+#User.create(email: 'artemasmith@gmail.com', password: '12345678', role: :admin)
+nik = User.new(email: 'nikita@ples.ru', password: '12345678', role: :admin, login: nikita)
 nik.save
 nik.activities.create(amount_debet: 100000)
-nik.update(login: 'nikita')
+art = FactoryGirl.create(:user, email: 'artemasmith@gmail.com', password: '12345678', role: :admin, login: 'art')
