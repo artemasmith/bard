@@ -5,6 +5,7 @@ class Ability
     user ||= User.new
     if user.admin?
       can :manage, :all
+      can :access, :rails_admin
     elsif user.client?
       can :read, :all
       can [:update, :edit, :destroy], Shop, user_id: user.id
@@ -13,7 +14,6 @@ class Ability
       end
       can [:update, :edit, :destroy], UnvalidatedWare, user_id: user.id
       can [:new, :create], UnvalidatedWare
-      can :manage, ClientCode, user_id: user.id
       #can :update, Client, id: user.id
     else
       can :read, :all

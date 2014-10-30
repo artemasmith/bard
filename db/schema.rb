@@ -129,11 +129,6 @@ ActiveRecord::Schema.define(version: 20140703050059) do
     t.datetime "updated_at"
   end
 
-  create_table "user_codes", force: true do |t|
-    t.integer "user_id"
-    t.integer "barcode_id"
-  end
-
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",  null: false
     t.string   "encrypted_password",     default: "",  null: false

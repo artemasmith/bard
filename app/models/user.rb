@@ -29,9 +29,6 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-  has_and_belongs_to_many :group, class_name: 'GroupUser'
-
-  has_and_belongs_to_many :roles, :join_table => :users_roles
 
   has_many :shops
   #has_and_belongs_to_many :wares
@@ -42,7 +39,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :tariff
 
-  before_save :set_default_role
+  before_create :set_default_role
   after_create :set_initial_tariff
 
   #ROLES = [:admin, :manager, :client]
@@ -66,10 +63,11 @@ class User < ActiveRecord::Base
     end
   end
 
+
   private
 
   def set_default_role
-    self.role = :client
+    self.role ||= :client
   end
   def set_initial_tariff
     self.update(tariff: Tariff.find_by_title('Free')) if self.tariff.blank?
