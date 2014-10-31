@@ -52,6 +52,10 @@ class ShopsController < ApplicationController
   def edit
   end
 
+  def get_token
+    respond_to :js
+  end
+
   protected
 
   def shop_params

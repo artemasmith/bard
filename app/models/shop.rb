@@ -3,7 +3,7 @@
 # Table name: shops
 #
 #  id           :integer          not null, primary key
-#  ip           :string(255)
+#  ip           :string(255)      default("0.0.0.0")
 #  out_id       :integer
 #  user_id      :integer
 #  auth_token   :string(255)
@@ -11,9 +11,9 @@
 #  address      :string(255)
 #  shop_type    :string(255)
 #  title        :string(255)
+#  state        :integer          default(0)
 #  created_at   :datetime
 #  updated_at   :datetime
-#  state        :integer          default(0)
 #
 
 class Shop < ActiveRecord::Base

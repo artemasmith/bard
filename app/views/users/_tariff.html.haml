@@ -7,11 +7,16 @@
     .span2
     .span6
       %table.table.table-bordered
+        %tr
+          %th= t "title"
+          %th= t "cost"
+          %th= t "tariff.shops_count"
+          %td
         -Tariff.all.each do |t|
           %tr
-            %th= t("tariff.#{t.title.downcase}")
-            %th= t "tariff.cost"
-            %th= "max shops #{t.shops_count}"
+            %td= t("tariff.#{t.title.downcase}")
+            %td= t.cost.to_s
+            %td= t.shops_count
             %td
               =radio_button_tag :tariff_id, t.id, t.id == @user.tariff_id
       = submit_tag t(:update), class: 'btn btn-primary btn-small', data: { confirm: 'Are You sure?' }

@@ -42,13 +42,11 @@ class User < ActiveRecord::Base
   before_create :set_default_role
   after_create :set_initial_tariff
 
-  #ROLES = [:admin, :manager, :client]
-
   enum role: [:admin, :manager, :client]
 
-
   def get_name
-    self.name || self.email
+    return self.name if self.name.present?
+    self.email
   end
 
   def update_tariff(tariff_id)

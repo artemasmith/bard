@@ -16,6 +16,7 @@ Bard::Application.routes.draw do
     end
     resources :shops do
       member do
+        get :get_token, as: :get_token
         get :wares
       end
     end

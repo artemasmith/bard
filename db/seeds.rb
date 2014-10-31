@@ -95,3 +95,4 @@ nik = User.new(email: 'nikita@ples.ru', password: '12345678', role: :admin, logi
 nik.save
 nik.activities.create(amount_debet: 100000)
 art = FactoryGirl.create(:user, email: 'artemasmith@gmail.com', password: '12345678', role: :admin, login: 'art')
+art.activities.create(amount_debet: 100000)
