@@ -91,9 +91,9 @@ end
 end
 
 #User.create(email: 'artemasmith@gmail.com', password: '12345678', role: :admin)
-User.find_or_create_by(email: 'nikita@ples.ru', password: '12345678', role: :admin, login: 'nikita')
+FactoryGirl.create(:user, email: 'nikita@ples.ru', password: '12345678', role: :admin, login: 'nikita')
 nik = User.findby_email('nikita@ples.ru')
 nik.activities.create(amount_debet: 100000)
-User.find_or_create_by(email: 'artemasmith@gmail.com', password: '12345678', role: :admin, login: 'art')
+FactoryGirl.create(:user, email: 'artemasmith@gmail.com', password: '12345678', role: :admin, login: 'art')
 art = User.find_by_email('artemasmith@gmail.com')
 art.activities.create(amount_debet: 100000)
