@@ -57,7 +57,7 @@ class Shop < ActiveRecord::Base
     result = { 'unrecognized_wares' => [], 'characteristics' => [], 'wares' => [], 'properties' => [], 'categories' =>
         [], 'values' => [] }
 #TODO Refactor this!!!!!!!!
-    if wares == 'ALL'
+    if wares === 'ALL'
       self.wares.each do |ware|
         temp = JSON(ware.to_json)
         temp['barcode'] = (ware.barcodes.present?) ? ware.barcodes.last.number : 'unknown barcode or group'

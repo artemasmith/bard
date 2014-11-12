@@ -1,11 +1,6 @@
 Bard::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
-  get 'payments/new'
-
-  get 'payments/index'
-
-  get 'payments/show'
 
   resources :users, only: [:cabinet, :settings, :update] do
     member do

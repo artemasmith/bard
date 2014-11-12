@@ -1,4 +1,6 @@
 require 'mechanize'
+
+
 class Parser
 FoodURL = 'http://www.goodsmatrix.ru/goods-catalogue/Goods/Foodstuffs.html'
 
@@ -6,6 +8,25 @@ FoodURL = 'http://www.goodsmatrix.ru/goods-catalogue/Goods/Foodstuffs.html'
     @agent = Mechanize.new
     page = @agent.get(FoodURL)
     @catalog = page.search("table#ctl00_ContentPH_ChildDL").search('a').map{ |c| { name: c.text, href: c['href'], children: [] } }
+  end
+
+  def self.has_children node
+    node.search("table#ctl00_ContentPH_ChildDL").search('a').present?
+  end
+
+  def make_full_catalog
+    @catalog.each do |category|
+      page = @agent.get(categor['href'])
+      while Parser.has_children page do
+
+      end
+    end
+  end
+
+  def get_children node, page
+    #if Parser.has_children page
+      node['children'] = page.search("table#ctl00_ContentPH_ChildDL").search('a').map{ |c| { name: c.text, href: c['href'], children: [] } }
+    #end
   end
 
   #recursive grabering of categories

@@ -10,10 +10,10 @@ class Api::V1::BarcodesController < ApplicationController
   end
 
   def show
-    #render json: { errors: 'no barcode provided' }, status: 400 if params[:barcode].blank?
     if params[:barcodes].present?
+      puts "BRACODES= #{params[:barcodes]}"
       result = @shop.get_wares params[:barcodes]
-      render json: result.to_json
+      render json: result
     else
       render json: { errors: 'no barcode provided' }, status: 400
     end
