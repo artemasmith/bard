@@ -12,6 +12,10 @@
 #  state       :integer          default(0)
 #  created_at  :datetime
 #  updated_at  :datetime
+#  alcohol     :boolean          default(FALSE)
+#  producer_id :integer
+#  capacity    :decimal(, )
+#  strength    :decimal(, )
 #
 
 require 'spec_helper'

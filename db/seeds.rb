@@ -9,13 +9,15 @@
 
 #CATEGORIES
 [
-    { title: 'макаронные изделия' },
-    { title: 'крупы' },
-    { title: 'специи' },
-    { title: 'молочная продукция' },
-    { title: 'колбасные изделия' },
-    { title: 'мясо' },
-    { title: 'рыба' }
+    { title: 'Продукты питания', alt_title: 'Foodsstuffs' },
+    { title: 'Алкогольные напитки', alt_title: 'Alchogolic-drinks'  },
+    { title: 'Бытовая химия', alt_title: 'Household-goods'  },
+    { title: 'Детские товары', alt_title: 'Goods-for-children'  },
+    { title: 'Зоотовары', alt_title: 'Goods-for-pets'  },
+    { title: 'Косметика, парфюмерия', alt_title: 'Perfume-and-toiletries'  },
+    { title: 'Медицинские товары', alt_title: 'Medical-goods'  },
+    { title: 'Табачные изделия', alt_title: 'Tobacco-products'  },
+    { title: 'Товары для дома', alt_title: 'Homeware'  }
 ].each do |category|
   Category.find_or_create_by(category)
 end

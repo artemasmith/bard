@@ -16,6 +16,7 @@ gem 'haml-rails'
 #gem 'knockoutjs-rails'
 gem 'will_paginate'
 gem 'nokogiri'
+gem 'mechanize'
 gem 'nested_form'
 gem 'rails_admin'
 

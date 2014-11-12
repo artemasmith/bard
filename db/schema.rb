@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141028114648) do
+ActiveRecord::Schema.define(version: 20141111080015) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,18 @@ ActiveRecord::Schema.define(version: 20141028114648) do
     t.datetime "updated_at"
   end
 
+  create_table "alcohol_makers", force: true do |t|
+    t.string   "title"
+    t.string   "inn"
+    t.string   "kpp"
+    t.boolean  "importer"
+    t.string   "license"
+    t.date     "license_expire"
+    t.integer  "region"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "barcodes", force: true do |t|
     t.string   "number"
     t.integer  "ware_id"
@@ -53,6 +65,7 @@ ActiveRecord::Schema.define(version: 20141028114648) do
     t.integer  "id_ext"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "alt_title"
   end
 
   create_table "categories_properties", force: true do |t|
@@ -197,6 +210,10 @@ ActiveRecord::Schema.define(version: 20141028114648) do
     t.integer  "state",       default: 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "alcohol",     default: false
+    t.integer  "producer_id"
+    t.decimal  "capacity"
+    t.decimal  "strength"
   end
 
 end

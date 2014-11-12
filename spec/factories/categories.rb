@@ -7,6 +7,7 @@
 #  id_ext     :integer
 #  created_at :datetime
 #  updated_at :datetime
+#  alt_title  :string(255)
 #
 
 FactoryGirl.define do
