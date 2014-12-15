@@ -20,12 +20,13 @@
 
 class Ware < ActiveRecord::Base
   has_many :characteristics
-  belongs_to :category
+  #belongs_to :category
   has_many :barcodes
   #has_and_belongs_to_many :users
   has_and_belongs_to_many :shops
   belongs_to :parent, class_name: 'Ware', foreign_key: :parent_id
   has_many :children, class_name: 'Ware', foreign_key: :parent_id
+  has_and_belongs_to_many :wcategories
 
   before_save :generate_ext_id, :set_state
 
