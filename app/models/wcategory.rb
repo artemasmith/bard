@@ -10,7 +10,7 @@
 #
 
 class Wcategory < ActiveRecord::Base
-  has_many :children, class_name: :wcategory, foreign_key: :parent_id
-  belongs_to :parent, class_name: :wcategory, foreign_key: :parent_id
+  has_many :children, class_name: 'Wcategory', foreign_key: :parent_id
+  belongs_to :parent, class_name: 'Wcategory', foreign_key: :parent_id
   has_and_belongs_to_many :wares
 end
