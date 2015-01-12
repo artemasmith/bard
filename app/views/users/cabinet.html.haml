@@ -1,14 +1,24 @@
 %h1= t("user.cabinet")
-.row
-  .span4
+.container-fluid.row
+  .col-md-4
     %h3= "Привет, #{ current_user.get_name }"
-  .span5
-.row
-  %h3= "Ваш баланс #{ current_user.balance }"
-  =link_to "Пополнить", user_payments_path(current_user), class: 'btn btn-success'
-.row
-  .span4
+  .col-md-8
+.container-fluid.row
+  /.col-md-4
+  .col-md-8
+    %h3= "Ваш баланс #{ current_user.balance }"
+    =link_to "Пополнить", user_payments_path(current_user), class: 'btn btn-success'
+.container-fluid.row
+  /.col-md-4
+  .col-md-8
+    %h3= t"user.settings"
+    =link_to t(:settings), settings_user_path(current_user), class: 'btn btn-primary'
+.container-fluid.row
+  /.col-md-4
+  .col-md-8
     %h2= "Ваш тариф #{ @tariff.title }"
     = link_to t("tariff.change"), settings_user_path, class: 'btn btn-danger'
+
+
 
 

@@ -1,4 +1,4 @@
-class GMparser
+class Gmparser
   require 'open-uri'
   @@uri = 'http://goodsmatrix.ru/goods/'
   def self.get_product barcode
@@ -17,7 +17,7 @@ class GMparser
 
       if ware.save
         ware.wcategories << last_cat
-        return 'ok'
+        return ware.id
       else
         return ware.errors.full_messages
       end

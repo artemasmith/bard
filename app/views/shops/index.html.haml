@@ -1,25 +1,24 @@
 %h1= t(:your_shops)
-.row
-  .span9
+.container-fluid.row
+  .col-md-8
     %table.table.table-bordered
       %tr
-        %th= t(:ip)
-        %th= t(:title)
-        %th= t(:address)
-        %td
+        %th.col-md-3= t(:ip)
+        %th.col-md-3= t(:title)
+        %th.col-md-3= t(:address)
+        %td.col-md-3
       - @shops.each do |shop|
         %tr
           %td= shop.ip
           %td= shop.title
           %td= shop.address
           %td
-            .span2
-              = link_to t(:show), user_shop_path(current_user, shop), class: 'btn btn-small'
-            .span2
-              = link_to t(:edit), edit_user_shop_path(current_user, shop), class: 'btn btn-small'
-            .span2
-              = link_to t(:delete), user_shop_path(current_user, shop), method: :delete, class: 'btn btn-danger btn-small'
-.row
-  =link_to t(:create), new_user_shop_path(current_user), class: 'btn'
+            .btn-group
+              = link_to t(:show), user_shop_path(current_user, shop), class: 'btn btn-default btn-xs'
+              = link_to t(:edit), edit_user_shop_path(current_user, shop), class: 'btn btn-default btn-xs'
+              = link_to t(:delete), user_shop_path(current_user, shop), method: :delete, class: 'btn btn-danger btn-xs'
+.container-fluid.row
+  .col-md-8
+    =link_to t(:create), new_user_shop_path(current_user), class: 'btn btn-success'
 
 

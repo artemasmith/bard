@@ -1,6 +1,6 @@
 %h1= t(:your_shop)
-.row
-  .span9
+.container-fluid.row
+  .col-md-6
     %table.table.table-bordered
       %tr
         %th= t(:ip)
@@ -20,9 +20,10 @@
         %th= t(:token_expire)
         %td= @shop.token_expire
     .fa-comment
-      = t "Remember, for API access you need to provide your login too."
+      = t("Remember, for API access you need to provide your login too.")
     %br
-.row
-  =link_to t(:edit), edit_user_shop_path(current_user, @shop)
-  =link_to t(:back), user_shops_path(current_user)
+.container.row
+  .btn-group
+    =link_to t(:edit), edit_user_shop_path(current_user, @shop), class: 'btn btn-default'
+    =link_to t(:back), user_shops_path(current_user), class: 'btn btn-default'
 

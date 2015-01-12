@@ -1,18 +1,22 @@
+%h3= @shop.new_record? ? t("shop.new") : t("shop.edit")
 = form_for [current_user, @shop] do |f|
-  .row
-    .span1
-    = f.hidden_field :user_id, value: current_user.id
-    %table.table.table-bordered.span4
-      %tr
-        %th= t(:ip)
-        %td= f.text_field :ip
-      %tr
-        %th= t(:title)
-        %td= f.text_field :title
-      %tr
-        %th= t(:address)
-        %td= f.text_field :address
-    .span7
-  .row
-    .span1
-    = f.submit t(:save), class: 'btn btn-success'
+  .container-fluid.row
+    .col-md-2
+      = f.hidden_field :user_id, value: current_user.id
+    .col-md-4
+      %table.table.table-bordered
+        %tr
+          %th= t(:ip)
+          %td= f.text_field :ip
+        %tr
+          %th= t(:title)
+          %td= f.text_field :title
+        %tr
+          %th= t(:address)
+          %td= f.text_field :address
+    .col-md-6
+  .container-fluid.row
+    .col-md-2
+    .btn-group
+      = f.submit t(:save), class: 'btn btn-success'
+      = link_to t("back"), user_shops_path(current_user), class: 'btn btn-default'

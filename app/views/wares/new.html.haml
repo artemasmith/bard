@@ -1,2 +1,14 @@
-%h1 Wares#new
-%p Find me in app/views/wares/new.html.haml
+%h1= t "ware.new"
+%hr
+%h2= t"ware.import"
+.container-fluid
+  .col-md-1
+  .col-md-6
+    =form_for @ware do |f|
+      =hidden_field_tag :import, true
+      .col-md-9
+        = t("ware.barcode")
+        = text_field_tag :barcode
+      .col-md-3
+        = f.submit t('save'), class: 'btn btn-success'
+%hr
