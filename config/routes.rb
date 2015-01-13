@@ -2,6 +2,8 @@ Bard::Application.routes.draw do
 
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
+  post '/admin/ware/import', to: 'wares#create', as: :ware_import
+
   resources :users, only: [:cabinet, :settings, :update] do
     member do
       get :cabinet
@@ -33,7 +35,7 @@ Bard::Application.routes.draw do
   #  end
   #end
 
-  resources :wares
+  #resources :wares
   resources :barcodes
   devise_for :users
 

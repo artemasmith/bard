@@ -41,6 +41,10 @@ ru:
       item: "Элемент"
       message: "Сообщение"
     actions:
+      import:
+        title: 'импорт'
+        menu: 'импорт'
+        breadcrumb: "%{object_label}"
       dashboard:
         title: "Управление сайтом"
         menu: "Контрольная панель"
