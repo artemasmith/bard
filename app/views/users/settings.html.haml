@@ -1,9 +1,8 @@
 %h3= t('user.settings')
 =render 'layouts/errors', object: @user
-.row
-  .span2
-  .span6
+.container-fluid.row
+  .col-md-8
     = "Ваш баланс #{@user.balance}"
-    = link_to 'Поплнить баланс', new_user_payment_path(current_user)
+    = link_to 'Пополнить баланс', new_user_payment_path(current_user), class: 'btn btn-xs btn-success'
 = render 'users/form'
 = render 'users/tariff'

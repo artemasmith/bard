@@ -1,16 +1,15 @@
-%h3= t 'tariff.change'
+%h3= t 'tariff.change_title'
 .tariff-errors
   -if @msg.present?
     =@msg
 = form_tag update_tariff_user_path(@user), method: :put do
-  .row
-    .span2
-    .span6
+  .container-fluid.row
+    .col-md-6
       %table.table.table-bordered
         %tr
-          %th= t "title"
-          %th= t "cost"
-          %th= t "tariff.shops_count"
+          %th= t "tariff.title"
+          %th= t "tariff.cost"
+          %th= t "tariff.shop_count"
           %td
         -Tariff.all.each do |t|
           %tr

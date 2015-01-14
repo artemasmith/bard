@@ -57,6 +57,8 @@ ru:
     cost: 'Стоимость'
     title: 'Название'
     change: 'Изменить'
+    change_title: 'Изменить тариф'
+    shop_count: 'Количество магазинов'
   shop:
     title: 'Название'
     ip: 'IP адрес'

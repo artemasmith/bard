@@ -5,10 +5,6 @@ class ShopsController < ApplicationController
   before_action :authenticate_user!
 
 
-  def wares
-    @wares = @shop.wares
-  end
-
   def index
     @shops = current_user.shops
   end

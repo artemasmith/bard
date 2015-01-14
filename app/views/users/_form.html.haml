@@ -1,7 +1,6 @@
 = form_for @user do |f|
-  .row
-    .span2
-    .span6
+  .container-fluid.row
+    .col-md-6
       %table.table.table-bordered
         %tr
           %th= t('user.name')
@@ -15,7 +14,6 @@
         %tr
           %th= t('user.login')
           %td= f.text_field :login
-  .row
-    .span2
-    .span6
+  .container-fluid.row
+    .col-md-6
       = f.submit t(:save), class: 'btn'
