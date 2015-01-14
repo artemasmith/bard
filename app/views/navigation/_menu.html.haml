@@ -6,10 +6,8 @@
     %li= link_to t(:main_page), greetings_path
     %li= link_to t(:about), about_greetings_path
     %li= link_to t(:contact_us), contact_greetings_path
-    -if current_user
+    -if current_user.present?
       %li= link_to t(:cabinet), cabinet_user_path(current_user)
-      /%li= link_to t(:settings), settings_user_path(current_user)
-      %li= link_to t("models.ware"), new_ware_path if (can? :manage, Ware)
       %li= link_to t(:shops), user_shops_path(current_user)
       %li.divider
         %li= link_to t(:you_login_as) + " " +  current_user.get_name, "#"
