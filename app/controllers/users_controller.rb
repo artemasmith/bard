@@ -18,6 +18,7 @@ class UsersController < ApplicationController
     if @user.update(user_params) && @user.errors.blank?
       redirect_to cabinet_user_path(@user)
     else
+      flash[:error] = @user.errors.full_messages.join('; ')
       render 'settings'
     end
   end
@@ -26,6 +27,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id].to_i)
     if params[:tariff_id].present?
       @msg = @user.update_tariff(params[:tariff_id].to_i)
+    end
+    if @msg == 'not enough money'
+      flash[:error] = @msg
+    else
+      flash[:success] = @msg
     end
 
     render 'settings'

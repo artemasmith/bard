@@ -1,8 +1,0 @@
-%h3= t("wares")
-
-//TODO make js change of shops by selected category
-//= select_tag :shop, options_for_select(current_user.shops.map{ |shop| [shop.title, shop.id] })
-
-=render partial: 'wares/shop_wares', locals: { wares: @wares }
-
-= link_to t(:shops), user_shops_path(current_user)

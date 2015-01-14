@@ -1,7 +1,4 @@
 %h3= t 'tariff.change_title'
-.tariff-errors
-  -if @msg.present?
-    =@msg
 = form_tag update_tariff_user_path(@user), method: :put do
   .container-fluid.row
     .col-md-6

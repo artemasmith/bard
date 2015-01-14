@@ -24,6 +24,7 @@ class ShopsController < ApplicationController
         format.html { redirect_to user_shop_path(user_id: current_user.id, id: @shop.id) }
       end
     else
+      flash[:error] = @shop.errors.full_messages.join('; ')
       render :new
     end
   end
@@ -34,6 +35,7 @@ class ShopsController < ApplicationController
         format.html  { redirect_to user_shop_path(user_id: current_user.id, id: @shop.id) }
       end
     else
+      flash[:error] = @shop.errors.full_messages.join('; ')
       render :edit
     end
   end
