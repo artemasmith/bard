@@ -1,0 +1,18 @@
+h3= t 'tariff.change_title'
+= form_tag update_tariff_user_path(@user), method: :put do
+  .container-fluid.row
+    .col-md-6
+      table.table.table-bordered
+        tr
+          th= t "tariff.title"
+          th= t "tariff.cost"
+          th= t "tariff.shop_count"
+          td
+        -Tariff.all.each do |t|
+          tr
+            td= t("tariff.#{t.title.downcase}")
+            td= t.cost.to_s
+            td= t.shops_count
+            td
+              =radio_button_tag :tariff_id, t.id, t.id == @user.tariff_id
+      = submit_tag t(:update), class: 'btn btn-primary btn-small', data: { confirm: 'Are You sure?' }

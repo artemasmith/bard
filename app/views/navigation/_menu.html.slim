@@ -1,0 +1,22 @@
+.navbar.navbar-default
+  .container-fluid
+    .navbar-header.col-md-6.col-xs-6
+      =link_to root_path do
+        =image_tag 'super-logo.png', size: '70x50'
+    .col-md-6.col-xs-6
+      .collapse.navbar-collapse
+        ul.nav.navbar-nav
+          li= link_to t(:main_page), greetings_path
+          li= link_to t(:about), about_greetings_path
+          li= link_to t(:contact_us), contact_greetings_path
+          -if current_user.present?
+            li= link_to t(:cabinet), cabinet_user_path(current_user)
+            li= link_to t(:shops), user_shops_path(current_user)
+            li.divider
+              li.active= link_to t(:you_login_as) + " " +  current_user.get_name, "#"
+            li= link_to t(:logout), destroy_user_session_path, method: :delete
+          -else
+            li.divider
+            li.active= link_to t(:sign_in), user_session_path
+            li= link_to t(:sign_up), new_user_registration_path
+

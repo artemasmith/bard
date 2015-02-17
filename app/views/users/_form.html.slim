@@ -1,0 +1,19 @@
+= form_for @user do |f|
+  .container-fluid.row
+    .col-md-6
+      table.table.table-bordered
+        tr
+          th= t('user.name')
+          td= f.text_field :name, class: 'form-control'
+        tr
+          th= t('user.email')
+          td= f.text_field :email, class: 'form-control'
+        tr
+          th= t('user.specs')
+          td= f.text_field :specs, class: 'form-control'
+        tr
+          th= t('user.login')
+          td= f.text_field :login, class: 'form-control'
+  .container-fluid.row
+    .col-md-6
+      = f.submit t(:save), class: 'btn btn-default btn-primary'
