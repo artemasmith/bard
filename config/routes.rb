@@ -1,5 +1,7 @@
 Bard::Application.routes.draw do
 
+  get 'statistics/index'
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
 
   post '/admin/ware/import', to: 'wares#create', as: :ware_import

@@ -1,28 +1,22 @@
-h1= t("user.cabinet")
 .container-fluid.row
   .col-md-4
-    h3= "Привет, #{ current_user.get_name }"
-  .col-md-8
-.container-fluid
-  .col-md-6.col-xs-6
-    table.table
-      tr
-        td
-          label= "Ваш баланс #{ current_user.balance }"
-        td
-          /=link_to "Пополнить", user_payments_path(current_user), class: 'btn btn-success'
-          =link_to "Пополнить", '#', class: 'btn btn-success'
-      tr
-        td
-          label= t"user.settings"
-        td
-          =link_to t(:settings), settings_user_path(current_user), class: 'btn btn-primary'
-      tr
-        td
-          label= "Ваш тариф #{ @tariff.title }"
-        td
-          = link_to t("tariff.change"), settings_user_path, class: 'btn btn-danger'
-
-
-
-
+    h1= t("user.cabinet")
+    h3= "Привет, #{ current_user.get_name }!"
+    .table-responsive
+      table.table.table-condensed.text-left
+        tr
+          td
+            label= "Ваш баланс #{ current_user.balance }"
+          td.little-cell
+            /=link_to "Пополнить", user_payments_path(current_user), class: 'btn btn-success'
+            =link_to "Пополнить", '#', class: 'btn same-size btn-success'
+        tr
+          td
+            label= t"user.settings"
+          td
+            =link_to t(:settings), settings_user_path(current_user), class: 'btn same-size btn-primary'
+        tr
+          td
+            label= "Ваш тариф #{ @tariff.title }"
+          td
+            = link_to t("tariff.change"), settings_user_path, class: 'btn same-size btn-danger'

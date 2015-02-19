@@ -65,6 +65,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'
   gem 'database_cleaner'
+  gem 'rack-mini-profiler', require: false
 end
 
 # Use ActiveModel has_secure_password

@@ -1,7 +1,7 @@
 = form_for @user do |f|
   .container-fluid.row
     .col-md-6
-      table.table.table-bordered
+      table.table.table-bordered.small-table
         tr
           th= t('user.name')
           td= f.text_field :name, class: 'form-control'
